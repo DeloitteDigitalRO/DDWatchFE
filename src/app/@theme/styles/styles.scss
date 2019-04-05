@@ -1,0 +1,74 @@
+// themes - our custom or/and out of the box themes
+@import 'themes';
+
+// framework component themes (styles tied to theme variables)
+@import '~@nebular/theme/styles/globals';
+@import '~@nebular/auth/styles/all';
+@import '~@nebular/bootstrap/styles/globals';
+
+//fonts
+$FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
+@import '../../../../node_modules/open-sans-fonts/_open-sans-regular';
+@import '../../../../node_modules/open-sans-fonts/_open-sans-semibold';
+// ...
+
+// global app font size
+@import './font-size';
+
+// loading progress bar theme
+@import './pace.theme';
+
+// install the framework and custom global styles
+@include nb-install() {
+
+  // framework global styles
+  @include nb-theme-global();
+  @include nb-auth-global();
+  @include nb-bootstrap-global();
+
+  // loading progress bar
+  @include ngx-pace-theme();
+};
+
+.nb-theme-corporate {
+  background: #f0f3f4;
+  color: #666;
+  font-family: 'Open Sans';
+
+  nb-layout .layout .layout-container .content .columns {
+    nb-layout-column {
+      padding: 2.25rem 3.25rem;
+    }
+  }
+
+  .dd-card-container {
+    background: none;
+    border: none;
+
+    .dd-card {
+      background-color: #fff;
+      border: none;
+      border-radius: 5px;
+      position: relative;
+      padding: 5px 0;
+      margin-bottom: 24px;
+      box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
+      font-family: 'Open Sans';
+      height: 440px;
+
+      .dd-card-header {
+        height: 44px;
+        padding: 13px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+        h3 {
+          font-size: 16px;
+          font-weight: 600;
+          color: #666;
+          float: left;
+        }
+
+      }
+    }
+  }
+}
