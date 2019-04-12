@@ -9,8 +9,6 @@ import {
   NbThemeService,
 } from '@nebular/theme';
 
-import { StateService } from '../../../@core/utils';
-
 // TODO: move layouts into the framework
 @Component({
   selector: 'ngx-sample-layout',
@@ -54,20 +52,12 @@ export class SampleLayoutComponent implements OnDestroy {
 
   currentTheme: string;
 
-  constructor(protected stateService: StateService,
+  constructor(
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
               protected sidebarService: NbSidebarService) {
-    this.stateService.onLayoutState()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((layout: string) => this.layout = layout);
 
-    this.stateService.onSidebarState()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((sidebar: string) => {
-        this.sidebar = sidebar;
-      });
 
     const isBp = this.bpService.getByName('is');
     this.menuService.onItemSelect()

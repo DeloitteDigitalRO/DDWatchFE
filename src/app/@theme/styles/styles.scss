@@ -15,8 +15,6 @@ $FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
 // global app font size
 @import './font-size';
 
-// loading progress bar theme
-@import './pace.theme';
 
 // install the framework and custom global styles
 @include nb-install() {
@@ -26,8 +24,6 @@ $FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
   @include nb-auth-global();
   @include nb-bootstrap-global();
 
-  // loading progress bar
-  @include ngx-pace-theme();
 };
 
 .nb-theme-corporate {
@@ -54,7 +50,6 @@ $FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
       margin-bottom: 24px;
       box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
       font-family: 'Open Sans';
-      height: 440px;
 
       .dd-card-header {
         height: 44px;
@@ -67,7 +62,10 @@ $FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
           color: #666;
           float: left;
         }
+      }
 
+      ul {
+        padding-left: 0;
       }
     }
   }

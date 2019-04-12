@@ -1,0 +1,5 @@
+<nb-card class="dd-card-container col-xl-4 col-lg-6 col-sm-12" *ngFor="let key of objectKeys(metrics)">
+    <nb-card-body class="dd-card">
+        <h1>{{key}} "[" {{metrics[key]}} "]"</h1>
+    </nb-card-body>
+</nb-card>

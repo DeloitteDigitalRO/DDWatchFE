@@ -1,91 +1,154 @@
 .dd-project-date {
-    float: right;
-    position: relative;
-    text-align: right;
-    font-weight: 600;
+  float: right;
+  position: relative;
+  text-align: right;
+  font-weight: 600;
 }
-.dd-left-status {
+
+.dd-card-content {
+
+  .dd-left-status {
     border-right: 1px solid rgba(0, 0, 0, 0.12);
     float: left;
-    height: 350px;
     width: 50%;
     padding: 5px 20px;
     margin: 15px 0;
-}
-.dd-right-status {
+    height: 450px;
+  }
+
+  .dd-right-status {
     border-right: 1px solid rgba(0, 0, 0, 0.12);
     float: right;
-    height: 350px;
     width: 50%;
     padding: 5px 20px;
     margin: 15px 0;
+    height: 450px;
+
     .code-coverage {
 
-        .percentage {
-            margin-top: 30px;
-            margin-left: -20px;
-        }
+      .percentage {
+        margin-top: 30px;
+        margin-left: -20px;
+      }
 
-        .percentage-label {
-            position: absolute;
-            margin-top: 50px;
-            margin-left: 27px;
-            font-weight: 600;
-        }
-    }
-}
-.title-container {
-    display: table;
-
-    .icon-title {
-        font-size: 24px;
-        font-weight: 900;
-        width: 30px;
-        height: 30px;
-        border-radius: 3px;
-        text-align: center;
-        color: #ffffff;
-        display: inline-block;
-    }
-    .status-title {
+      .percentage-label {
+        position: absolute;
+        margin-top: 50px;
+        margin-left: 27px;
         font-weight: 600;
-        display: table-cell;
-        vertical-align: middle;
-        font-size: 16px;
-        letter-spacing: -1px;
-        padding: 0 3px;
+      }
+      .chart-label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+      }
     }
-}
-.content {
-    padding-top:40px;
 
-    .status {
-        width: 25px;
-        height: 25px;
-        display: inline-block;
-        vertical-align: middle;
-        border-radius: 3px;
-        margin-right: 10px;
-        text-align: center;
-        color: #ffffff;
-        line-height: 25px;
-    }
-    ul {
-        list-style: none;
+    .codebase-health-container {
+      clear: both;
+
+      h3 {
+        font-family: 'Open Sans';
+        background: rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      ul {
         padding-left: 0;
 
         li {
-            padding: 10px 0;
-            letter-spacing: -1px;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+          .value {
+            display: block;
+            float: right;
+            padding-right: 5px;
+          }
         }
+      }
     }
+  }
 }
+
+.title-container {
+  display: table;
+
+  .icon-title {
+    font-size: 24px;
+    font-weight: 900;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    text-align: center;
+    color: #ffffff;
+    display: inline-block;
+  }
+
+  .status-title {
+    font-weight: 600;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 16px;
+    letter-spacing: -1px;
+    padding: 0 3px;
+  }
+}
+
+.content {
+  padding-top: 40px;
+}
+
+.details-container {
+  position: absolute;
+  bottom: 20px;
+
+  button {
+    color: #666;
+    border: 1px solid #d6d6d6;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 10px 40px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
 .status-alert {
-    background: #e85656;
+  background: #e85656;
 }
+
 .status-warn {
-    background: #dfb81c;
+  background: #dfb81c;
 }
+
 .status-ok {
-    background: #90b900;
+  background: #90b900;
+}
+
+.status {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 3px;
+  margin-right: 10px;
+  text-align: center;
+  color: #ffffff;
+  line-height: 25px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    padding: 10px 0;
+    letter-spacing: -1px;
+  }
 }

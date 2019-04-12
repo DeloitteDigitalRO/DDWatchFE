@@ -1,47 +1,63 @@
 <div class="row">
-    <nb-card class="dd-card-container col-lg-4 col-md-6 col-sm-12" *ngFor="let project of projects">
+    <nb-card class="dd-card-container col-xl-4 col-lg-6 col-sm-12" *ngFor="let project of projects">
         <nb-card-body class="dd-card">
-          <div class="dd-card-header">
-            <h3>{{project.name}}</h3>
-            <span class="dd-project-date">{{project.date}}</span>
-          </div>
-          <div class="dd-card-content">
-            <div class="dd-left-status">
-              <div class="title-container">
-                <span class="icon-title status-alert">D</span>
-                <span class="status-title">elivery</span>
-              </div>
-              <div class="content">
-                <ul>
-                   <li><span class="status status-alert"><i class="ion-alert-circled"></i></span> Throughput</li>
-                   <li><span class="status status-warn"><i class="ion-flag"></i></span> Staffing <span> (24/25)</span></li>
-                   <li><span class="status status-ok"><i class="ion-checkmark-circled"></i></span> Risk</li>
-                </ul>
-              </div>
+            <div class="dd-card-header">
+                <h3>{{project.name}}</h3>
+                <span class="dd-project-date">{{project.date}}</span>
             </div>
-            <div class="dd-right-status">
-                <div class="title-container">
-                  <span class="icon-title status-ok">Q</span>
-                  <span class="status-title">uality</span>
+            <section class="dd-card-content">
+                <div class="dd-left-status">
+                    <div class="title-container">
+                        <span class="icon-title status-alert">D</span>
+                        <span class="status-title">elivery</span>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li><span class="status status-alert"><i class="ion-alert-circled"></i></span> Throughput
+                            </li>
+                            <li><span class="status status-warn"><i class="ion-flag"></i></span> Staffing <span>
+                                    (24/25)</span></li>
+                            <li><span class="status status-ok"><i class="ion-checkmark-circled"></i></span> Risk</li>
+                        </ul>
+                    </div>
+                    <div class="details-container">
+                        <button (click)="getDeliveryDetails(project.id)">Details</button>
+                    </div>
                 </div>
-                <div class="code-coverage">
-                  <div class="percentage">
-                      <ngx-charts-pie-chart
-                        [view]="view"
-                        arcWidth=0.25
-                        [scheme]="colorScheme"
-                        [labels]="false"
-                        [results]="single"
-                        [gradient]="gradient"
-                        [tooltipDisabled]="true"
-                        [doughnut]="true"
-                        (select)="onSelect($event)">
-                      </ngx-charts-pie-chart>
-                  </div>
-                  <div class="percentage-label">73%</div>
+                <div class="dd-right-status">
+                    <div class="title-container">
+                        <span class="icon-title status-ok">Q</span>
+                        <span class="status-title">uality</span>
+                    </div>
+                    <div class="code-coverage">
+                        <div class="percentage">
+                            <ngx-charts-pie-chart [view]="view" arcWidth=0.25 [scheme]="colorScheme" [labels]="false"
+                                [results]="single" [gradient]="gradient" [tooltipDisabled]="true" [doughnut]="true"
+                                (select)="onSelect($event)">
+                            </ngx-charts-pie-chart>
+                        </div>
+                        <div class="percentage-label">73%</div>
+                        <div class="chart-label">Overall code coverage</div>
+                    </div>
+                    <div class="codebase-health-container">
+                        <h3>Codebase Health</h3>
+                        <ul>
+                            <li><span class="status status-alert"><i class="ion-alert-circled"></i></span> Bugs
+                                <span class="value">679</span>
+                            </li>
+                            <li><span class="status status-warn"><i class="ion-flag"></i></span> Vulnerabilites 
+                                <span class="value">172</span>
+                            </li>
+                            <li><span class="status status-ok"><i class="ion-checkmark-circled"></i></span> Code Smell
+                                <span class="value">111</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="details-container">
+                        <button>Details</button>
+                    </div>
                 </div>
-            </div>
-          </div>
+            </section>
         </nb-card-body>
     </nb-card>
 </div>
