@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ProjectService } from '../../@shared/services/project.service';
 import { Project } from '../../@shared/models/project.model';
 import { Router } from '@angular/router';
-import { SonarReport } from '../../@shared/models/sonarReport.model';
+import * as moment from 'moment';
 @Component({
   selector: 'ngx-project',
   templateUrl: './project.component.html',
@@ -12,39 +12,67 @@ import { SonarReport } from '../../@shared/models/sonarReport.model';
 export class ProjectComponent {
 
     activeProject: Project;
-    metrics: Object
+    projectList: Project[];
+    metrics: Object;
     objectKeys = Object.keys;
-    //sonarReports;
 
+    //chart  options
+    showXAxis = true;
+    showYAxis = true;
+    gradient = false;
+    showLegend = false;
+    showXAxisLabel = false;
+    xAxisLabel = '';
+    showYAxisLabel = false;
+    yAxisLabel = '';
+    timeline = true;
+    colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    };
+    autoScale = true;
+    disabledMetrics = ['key', 'name', 'duplicatedLinesDensity', 'updateDate' ]
     constructor(private router: Router, private route: ActivatedRoute, private projectService: ProjectService){}
 
     ngOnInit() {
 
         this.route.paramMap.subscribe((params: ParamMap) => {
-            if ( params.has('id') && this.projectService.projects ) {
-                const activeReportId = params.get('id');
-                this.activeProject = this.projectService.projects.length > 0 && this.projectService.projects.find((el) => el.id === activeReportId)
+            const activeReportId = params.get('id');
+
+            // get current report based on param ID
+            if (params.has('id') && this.projectService.projects) {
+                this.projectList = this.projectService.projects;
+                this.activeProject = this.projectList.length > 0 && this.projectService.projects.find((el) => el.id === activeReportId)
+                this.initChartData(this.activeProject);
             }
-            else{
-                this.router.navigateByUrl('/pages/dashboard/');
+            // if page is accessed directly then fetch the data then filter the current report
+            else {
+                this.projectService.getProjects().then((result) => {
+                    this.projectList = result as Array<Project>;
+                    this.activeProject = this.projectList.length > 0 && this.projectService.projects.find((el) => el.id === activeReportId)
+                    this.initChartData(this.activeProject);
+                  })
             }
-           // console.log(this.activeProject)
-            
-           // this.sonarReports = new SonarReport
-            this.metrics = Object.assign({}, this.activeProject.qualityReports[0].sonarQubeReport);
-            for (var key in this.metrics) {
-                this.metrics[key] = []
-            }
-            this.metrics['updateDate'] = []
-            this.activeProject.qualityReports.forEach((sonarReport) => {
-                console.log(sonarReport.sonarQubeReport)
-                for (var key in sonarReport.sonarQubeReport) {
-                    this.metrics[key].push(sonarReport.sonarQubeReport[key])
-                }
-                this.metrics['updateDate'].push(sonarReport.updateDate);
-            })
-            console.log(this.metrics)
+
         });
     }
 
+    initChartData(activeProject) {
+        //loop through all the metrics and assign them as data arrays
+        //this.metrics = {Object.assign({}, activeProject.qualityReports[0].sonarQubeReport)};
+        this.metrics = {};
+        for (var key in activeProject.qualityReports[0].sonarQubeReport) {
+            if(this.disabledMetrics.indexOf(key) === -1){
+                this.metrics[key] = [{name: key, series:[]}]
+            }
+        }
+        activeProject.qualityReports.forEach((sonarReport) => {
+            const date = moment(sonarReport.updateDate).format('DD MM')
+            for (var _key in sonarReport.sonarQubeReport) {
+                if(this.disabledMetrics.indexOf(_key) === -1){
+                    this.metrics[_key][0].series.push({name: date, value: sonarReport.sonarQubeReport[_key]});
+                }
+            }
+        })
+        console.log(this.metrics)
+    }
 }

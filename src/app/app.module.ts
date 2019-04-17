@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectService } from './@shared/services/project.service';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { ProjectService } from './@shared/services/project.service';
     HttpClientModule,
     AppRoutingModule,
     NgbModule.forRoot(),
-    ThemeModule.forRoot()
+    ThemeModule.forRoot(),
+    MomentModule
   ],
   bootstrap: [AppComponent],
   providers: [

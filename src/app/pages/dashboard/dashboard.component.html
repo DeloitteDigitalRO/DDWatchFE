@@ -21,7 +21,7 @@
                         </ul>
                     </div>
                     <div class="details-container">
-                        <button (click)="getDeliveryDetails(project.id)">Details</button>
+                        <button>Details</button>
                     </div>
                 </div>
                 <div class="dd-right-status">
@@ -45,7 +45,7 @@
                             <li><span class="status status-alert"><i class="ion-alert-circled"></i></span> Bugs
                                 <span class="value">679</span>
                             </li>
-                            <li><span class="status status-warn"><i class="ion-flag"></i></span> Vulnerabilites 
+                            <li><span class="status status-warn"><i class="ion-flag"></i></span> Vulnerabilites
                                 <span class="value">172</span>
                             </li>
                             <li><span class="status status-ok"><i class="ion-checkmark-circled"></i></span> Code Smell
@@ -54,7 +54,7 @@
                         </ul>
                     </div>
                     <div class="details-container">
-                        <button>Details</button>
+                        <button (click)="getDeliveryDetails(project.id)">Details</button>
                     </div>
                 </div>
             </section>

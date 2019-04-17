@@ -68,5 +68,13 @@ $FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
         padding-left: 0;
       }
     }
+    
+    //ngx charts styles
+    g.x.axis line {
+      display: none !important;
+    }
+    svg.ngx-charts path {
+      stroke-width: 3px;
+    }
   }
 }
