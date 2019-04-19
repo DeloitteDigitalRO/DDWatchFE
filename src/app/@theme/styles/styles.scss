@@ -29,7 +29,7 @@ $FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
 .nb-theme-corporate {
   background: #f0f3f4;
   color: #666;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans' !important;
 
   nb-layout .layout .layout-container .content .columns {
     nb-layout-column {
@@ -45,16 +45,22 @@ $FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
       background-color: #fff;
       border: none;
       border-radius: 5px;
+      display: block;
       position: relative;
       padding: 5px 0;
       margin-bottom: 24px;
       box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
       font-family: 'Open Sans';
 
+      .dd-card-content {
+        margin: 0 15px;
+      }
+
       .dd-card-header {
         height: 44px;
         padding: 13px 20px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        overflow: hidden;
 
         h3 {
           font-size: 16px;
@@ -68,7 +74,7 @@ $FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
         padding-left: 0;
       }
     }
-    
+
     //ngx charts styles
     g.x.axis line {
       display: none !important;
@@ -77,4 +83,29 @@ $FontPathOpenSans: '../../../../node_modules/open-sans-fonts/open-sans';
       stroke-width: 3px;
     }
   }
+}
+
+
+button {
+  color: #666;
+  border: 1px solid #d6d6d6;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 10px 40px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+.status-alert {
+  background: #e85656;
+}
+
+.status-warn {
+  background: #dfb81c;
+}
+
+.status-ok {
+  background: #90b900;
 }

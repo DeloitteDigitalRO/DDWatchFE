@@ -1,0 +1,14 @@
+.radio-group {
+    margin-top: 20px;
+    display: block;
+    padding-left: 20px;
+    .radio-button {
+        display: inline-block;
+    }
+    textarea {
+        border-radius: 0;
+    }
+}
+.details-area {
+    padding: 20px;
+}

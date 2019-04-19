@@ -42,4 +42,8 @@ export class DashboardComponent  implements OnInit{
         this.router.navigateByUrl('/pages/project/' + reportId);
 
     }
+    createNewProject() {
+        alert(21323)
+        this.router.navigateByUrl('/pages/new-project');
+    }
 }

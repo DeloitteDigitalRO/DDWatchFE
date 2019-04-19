@@ -1,4 +1,40 @@
 <div class="row">
+    <nb-card class="dd-card-container col-sm-12">
+        <nb-card-body class="dd-card">
+            <div class="dd-card-header">
+                <h3>Cyclones</h3>
+            </div>
+            <section class="dd-card-content row">
+                <div class="ratings-container col-sm-4">
+                    <nb-list>
+                        <nb-list-item>
+                            Project quality rating
+                            <span class="ratings status-ok">87</span>
+                        </nb-list-item>
+                        <nb-list-item>
+                            Current overall coverage
+                            <span class="ratings status-ok">87</span>
+                        </nb-list-item>
+                        <nb-list-item>
+                            Current code duplication
+                            <span class="ratings status-warn">44</span>
+                        </nb-list-item>
+                        <nb-list-item>
+                            Current code bugs
+                            <span class="ratings status-alert">322</span>
+                        </nb-list-item>
+                    </nb-list>
+                </div>
+                <div class="recommended-actions col-sm-8">
+                    <h5>RECOMMENDED ACTIONS</h5>
+                    <nb-list>
+                        <nb-list-item class="recommended-list-item">Install Gradle plugin to integrate with BLA</nb-list-item>
+                        <nb-list-item class="recommended-list-item">Run audit on library licences</nb-list-item>
+                    </nb-list>
+                </div>
+            </section>
+        </nb-card-body>
+    </nb-card>
     <nb-card class="dd-card-container col-xl-4 col-lg-6 col-sm-12" *ngFor="let key of objectKeys(metrics)">
         <nb-card-body class="dd-card">
             <div class="dd-card-header">

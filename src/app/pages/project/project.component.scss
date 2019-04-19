@@ -1,8 +1,30 @@
 .dd-card {
+    h5 {
+        font-family: 'Open Sans';
+    }
     .chart-container {
         width:100%;
         height: 200px;
         margin: 20px 50px 20px 0;
         overflow: hidden;
+    }
+    .ratings {
+        width: 35px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        float: right;
+    }
+    .recommended-actions {
+        padding: 10px 30px;
+
+        .recommended-list-item {
+            border: 0;
+            display: list-item;
+            list-style-type: disc;
+            list-style-position: inside;
+        }
     }
 }

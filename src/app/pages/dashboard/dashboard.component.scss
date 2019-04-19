@@ -6,6 +6,7 @@
 }
 
 .dd-card-content {
+    margin: 0 15px;
 
   .dd-left-status {
     border-right: 1px solid rgba(0, 0, 0, 0.12);
@@ -104,31 +105,6 @@
 .details-container {
   position: absolute;
   bottom: 20px;
-
-  button {
-    color: #666;
-    border: 1px solid #d6d6d6;
-    background-color: transparent;
-    border-radius: 5px;
-    padding: 10px 40px;
-    transition: background-color 0.2s;
-    cursor: pointer;
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-  }
-}
-
-.status-alert {
-  background: #e85656;
-}
-
-.status-warn {
-  background: #dfb81c;
-}
-
-.status-ok {
-  background: #90b900;
 }
 
 .status {
@@ -151,4 +127,7 @@ ul {
     padding: 10px 0;
     letter-spacing: -1px;
   }
+}
+.add-proj-btn {
+    margin: 10px 20px;
 }
