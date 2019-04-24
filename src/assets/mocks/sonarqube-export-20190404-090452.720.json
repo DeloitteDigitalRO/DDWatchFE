@@ -1,0 +1,50 @@
+{
+    "metrics": {
+        "ncloc": 608,
+        "complexity": 40,
+        "coverage": 0.0,
+        "cognitive_complexity": 6,
+        "duplicated_blocks": 2,
+        "duplicated_lines": 66,
+        "duplicated_lines_density": 7.8,
+        "violations": 36,
+        "code_smells": 35,
+        "bugs": 0,
+        "vulnerabilities": 1,
+        "branch_coverage": null,
+        "line_coverage": 0.0
+    },
+    "issues": {
+        "total": 36,
+        "bugs": {
+            "total": 0,
+            "severity": {
+                "info": 0,
+                "minor": 0,
+                "major": 0,
+                "critical": 0,
+                "blockers": 0
+            }
+        },
+        "codeSmells": {
+            "total": 35,
+            "severity": {
+                "info": 0,
+                "minor": 18,
+                "major": 14,
+                "critical": 2,
+                "blockers": 1
+            }
+        },
+        "vulnerabilities": {
+            "total": 1,
+            "severity": {
+                "info": 0,
+                "minor": 1,
+                "major": 0,
+                "critical": 0,
+                "blockers": 0
+            }
+        }
+    }
+}

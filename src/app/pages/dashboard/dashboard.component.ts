@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../../@shared/services/project.service';
 import { Project } from '../../@shared/models/project.model';
 import { Router } from '@angular/router';
+import { SonarReport } from '../../@shared/models/sonarReport.model';
+import { QualityReport } from '../../@shared/models/qualityReport.model';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -12,38 +14,59 @@ export class DashboardComponent  implements OnInit{
 
     constructor(private projectService: ProjectService, private router: Router){}
 
-    projects:Array<Project> = [];
+    projects: Array<Project> = [];
 
     //chart data mock
     view: any[] = [120, 120];
-    single = [
-        {
-        "name": "Germany",
-        "value": 60
-        },
-        {
-        "name": "USA",
-        "value": 40
-        }
-    ];
-
     colorScheme = {
-        domain: ['#d2d2d2', '#ffffff']
+        domain: ['#d2d2d2', '#f7f7f7']
     };
 
     ngOnInit() {
 
         this.projectService.getProjects().then((result) => {
             this.projects = result as Array<Project>;
-        })
-    }
+            //set the latest quality report for each project
+            this.setLatestQualityReport(this.projects);
+        });
+    };
 
     getDeliveryDetails(reportId) {
         this.router.navigateByUrl('/pages/project/' + reportId);
 
     }
+
+    editProject(projectId) {
+        console.log(projectId)
+        this.router.navigateByUrl('/pages/edit-project/' + projectId);
+    }
+
     createNewProject() {
-        alert(21323)
         this.router.navigateByUrl('/pages/new-project');
+    }
+
+    setLatestQualityReport(projects: Array<Project>) {
+        projects.forEach( (project) => {
+
+            let latestQualityReport =  project.qualityReports.find((qr) => qr.updateDate === project.lastQualityReport);
+            project.latestQualityReportData = !latestQualityReport ? latestQualityReport = project.qualityReports[project.qualityReports.length-1] : latestQualityReport;
+
+            let overallCoverageChartData = this.generatePieChartData(project)
+            project.overallCoverageChartData = overallCoverageChartData;
+        })
+    }
+
+    generatePieChartData(project: Project) {
+        const chartData = [
+            {
+            "name": "1",
+            "value": Math.floor(project.latestQualityReportData.sonarQubeReport.overallCoverage)
+            },
+            {
+            "name": "2",
+            "value": 100 - Math.floor(project.latestQualityReportData.sonarQubeReport.overallCoverage)
+            }
+        ]
+        return  chartData
     }
 }

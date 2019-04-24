@@ -1,98 +1,100 @@
 
 <section>
-    <div class="row">
-        <nb-card class="dd-card-container col-sm-12 col-md-6 col-xl-4">
-            <nb-card-body class="dd-card">
-                <div class="dd-card-header">
-                    <h3>Does the project has an unified code standard?</h3>
-                </div>
-                <section class="dd-card-content">
-                    <div class="row checkboxes-radio">
-                        <div class="col-sm-4">
-                            <nb-radio-group class="radio-group"
-                                [(value)]="reposnseValue">
-                                <nb-radio class="radio-button"
-                                    [value]="'yes'">
-                                    Yes
-                                </nb-radio>
-                                <nb-radio class="radio-button"
-                                    [value]="'no'">
-                                    No
-                                </nb-radio>
-                            </nb-radio-group>
-                        </div>
+    <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()"> -->
+        <div class="row">
+            <nb-card class="dd-card-container col-sm-12">
+                <nb-card-body class="dd-card">
+                    <div class="dd-card-header">
+                        <h3>Add new project</h3>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="input-group details-area">
-                                <textarea rows="5" nbInput fullWidth shape="square"  placeholder="Details"></textarea>
-                            </div>
+                    <section class="dd-card-content">
+                        <div class="input-group col-sm-6">
+                                <label>Project Name</label>
+                            <input type="text" class="form-control" placeholder="Project Name" name="projectName" fullWidth />
+                            <span class="input-group-append">
+                            </span>
                         </div>
-                    </div>
-                </section>
-            </nb-card-body>
-        </nb-card>
-        <nb-card class="dd-card-container col-sm-12 col-md-6 col-xl-4">
-            <nb-card-body class="dd-card">
-                <div class="dd-card-header">
-                    <h3>Is the coding standard imposed? (coding style integrated in the build)</h3>
-                </div>
-                <section class="dd-card-content">
-                    <div class="row checkboxes-radio">
-                        <div class="col-sm-4">
-                            <nb-radio-group class="radio-group"
-                                [(value)]="reposnseValue">
-                                <nb-radio class="radio-button"
-                                    [value]="'yes'">
-                                    Yes
-                                </nb-radio>
-                                <nb-radio class="radio-button"
-                                    [value]="'no'">
-                                    No
-                                </nb-radio>
-                            </nb-radio-group>
+                        <div class="input-group col-sm-6">
+                                <label>Description</label>
+                            <input type="text" class="form-control" placeholder="Description" name="description" fullWidth />
+                            <span class="input-group-append">
+                            </span>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="input-group details-area">
-                                <textarea rows="5" nbInput fullWidth shape="square"  placeholder="Details"></textarea>
-                            </div>
+                    </section>
+                    <section class="dd-card-content">
+                        <div class="input-group col-sm-6">
+                                <label>Delivery Lead</label>
+                            <input type="text" class="form-control" placeholder="Delivery Lead" name="deliveryLead" fullWidth />
+                            <span class="input-group-append">
+                            </span>
                         </div>
-                    </div>
-                </section>
-            </nb-card-body>
-        </nb-card>
-        <nb-card class="dd-card-container col-sm-12 col-md-6 col-xl-4">
-            <nb-card-body class="dd-card">
-                <div class="dd-card-header">
-                    <h3>Does the prpject has an unified code standard?</h3>
-                </div>
-                <section class="dd-card-content">
-                    <div class="row checkboxes-radio">
-                        <div class="col-sm-4">
-                            <nb-radio-group class="radio-group"
-                                [(value)]="reposnseValue">
-                                <nb-radio class="radio-button"
-                                    [value]="'yes'">
-                                    Yes
-                                </nb-radio>
-                                <nb-radio class="radio-button"
-                                    [value]="'no'">
-                                    No
-                                </nb-radio>
-                            </nb-radio-group>
+                        <div class="input-group col-sm-6">
+                                <label>Delivery lead email</label>
+                            <input type="email" class="form-control" placeholder="Email" name="deliveryLeadEmail" fullWidth />
+                            <span class="input-group-append">
+                            </span>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="input-group details-area">
-                                <textarea rows="5" nbInput fullWidth shape="square"  placeholder="Details"></textarea>
-                            </div>
+                    </section>
+                    <section class="dd-card-content">
+                        <div class="input-group col-sm-6">
+                                <label>Technical Lead</label>
+                            <input type="text" class="form-control" placeholder="Technical Lead" name="technicalLead" fullWidth />
+                            <span class="input-group-append">
+                            </span>
                         </div>
-                    </div>
-                </section>
-            </nb-card-body>
-        </nb-card>
-    </div>
+                        <div class="input-group col-sm-6">
+                                <label>Technical lead email</label>
+                            <input type="email" class="form-control" placeholder="Email" name="technicalLeadEmail" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                    </section>
+                    <section class="dd-card-content">
+                        <div class="input-group col-sm-6">
+                                <label>Delivery Status</label>
+                            <input type="text" class="form-control" placeholder="Delivery Status" name="deliveryStatus" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                        <div class="input-group col-sm-6">
+                                <label>Quality Status</label>
+                            <input type="text" class="form-control" placeholder="Quality Status" name="qualityStatus" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                    </section>
+                    <section class="dd-card-content">
+                        <div class="input-group col-sm-6">
+                                <label>Sonar Qube URL</label>
+                            <input type="text" class="form-control" placeholder="SonarQube url" name="sonarQubeUrl" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                        <div class="input-group col-sm-6">
+                                <label>Sonar Component Key</label>
+                            <input type="text" class="form-control" placeholder="Sonar Component Key" name="sonarComponentKey" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                    </section>
+                    <section class="dd-card-content">
+                        <div class="input-group col-sm-6">
+                                <label>Tags</label>
+                            <input type="text" class="form-control" placeholder="Tags" name="tags" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                    </section>
+                    <section class="dd-card-content">
+                        <div class="input-group sonar-report-container">
+                            <button type="submit" class="btn btn-primary input-group-text">
+                                Submit
+                            </button>
+                        </div>
+                    </section>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    <!-- </form> -->
 </section>
+    
