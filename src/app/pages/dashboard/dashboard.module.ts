@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { ProjectComponent } from '../project/project.component';
 import { EditProjectComponent } from '../edit-project/edit-project.component';
 import { NewProjectComponent } from '../new-project/new-project.component';
+import { ProjectReportsComponent } from '../project-reports/project-reports.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
         DashboardComponent,
         ProjectComponent,
         EditProjectComponent,
-        NewProjectComponent
+        NewProjectComponent,
+        ProjectReportsComponent
     ],
 })
 export class DashboardModule { }

@@ -52,9 +52,8 @@ export class DashboardComponent  implements OnInit{
         });
     };
 
-    getDeliveryDetails(reportId) {
+    getQualityDetails(reportId) {
         this.router.navigateByUrl('/pages/project/' + reportId);
-
     }
 
     editProject(projectId) {
@@ -89,5 +88,10 @@ export class DashboardComponent  implements OnInit{
             }
         ]
         return  chartData
+    }
+
+    addReport(projectId) {
+        console.log(projectId)
+        this.router.navigateByUrl('/pages/project-reports/' + projectId);
     }
 }
