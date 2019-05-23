@@ -136,6 +136,17 @@
                             <i [ngClass]="getStatusStyle(metrics.duplicationDensityStatus)"></i>
                         </div>
                     </div>
+                    <div class="row p-0" style="border-top: 1px solid rgba(0, 0, 0, 0.12);">
+                        <div class="col-5 label-col">
+                            Risk Overall Status
+                        </div>
+                        <div class="col-5 spaced">
+                            {{ metrics.riskOverallValue }}
+                        </div>
+                        <div class="col-2 status">
+                            <i [ngClass]="getStatusStyle(metrics.riskOverallStatus)"></i>
+                        </div>
+                    </div>
                 </section>
             </nb-card-body>
         </nb-card>
