@@ -23,7 +23,7 @@
             </nb-card-body>
         </nb-card>
     </div>
-    <div class="row" [hidden]="metrics === null">
+    <div class="row" *ngIf="metrics">
         <nb-card class="dd-card-container col-sm-12">
             <nb-card-body class="dd-card">
                 <div class="dd-card-header">
@@ -35,7 +35,9 @@
                             Empire Time
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.empireTimeValue }}
+                            <span>
+                                {{ metrics.empireTimeValue }}%
+                            </span>
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.empireTimeStatus)"></i>
@@ -46,7 +48,7 @@
                             Delivery
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.deliveryValue }}
+                            {{ metrics.deliveryValue }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.deliveryStatus)"></i>
@@ -57,7 +59,7 @@
                             Attrition
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.attritionValue }}
+                            {{ metrics.attritionValue }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.attritionStatus)"></i>
@@ -79,8 +81,12 @@
                             Escalation
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.escalationSeniorityValue }},
-                            {{ metrics.escalationRootCauseValue }}
+                            <div>
+                                Seniority: {{ metrics.escalationSeniorityValue }}
+                            </div>
+                            <div>
+                                Root cause: {{ metrics.escalationRootCauseValue }}
+                            </div>
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.escalationStatus)"></i>
@@ -102,7 +108,7 @@
                             Test Code Coverage
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.testCoverageValue }}
+                            {{ metrics.testCoverageValue }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.testCoverageStatus)"></i>
@@ -113,7 +119,7 @@
                             Branch Coverage
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.branchCoverageValue }}
+                            {{ metrics.branchCoverageValue }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.branchCoverageStatus)"></i>
@@ -124,7 +130,7 @@
                             Density of Duplication
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.duplicationDensityValue }}
+                            {{ metrics.duplicationDensityValue }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.duplicationDensityStatus)"></i>
