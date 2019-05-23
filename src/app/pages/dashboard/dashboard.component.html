@@ -20,7 +20,17 @@
                             <span class="icon-title status-alert">D</span>
                             <span class="status-title">elivery</span>
                         </div>
-                        <div class="content">
+                        <div class="code-coverage">
+                            <div class="percentage">
+                                <ngx-charts-bar-vertical [view]="qualityView" [scheme]="qualityColorScheme" [results]="mockQualityData" [gradient]="gradient"
+                                [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                                [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [tooltipDisabled]="true" [roundEdges]="false">
+                                </ngx-charts-bar-vertical>
+                            </div>
+                            <div class="chart-label">Overall delivery status</div>
+                        </div>
+                        <div class="codebase-health-container">
+                            <h3>Delivery status</h3>
                             <ul>
                                 <li><span class="status status-alert"><i class="ion-alert-circled"></i></span> Throughput
                                 </li>

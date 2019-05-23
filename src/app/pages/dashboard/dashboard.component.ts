@@ -21,7 +21,28 @@ export class DashboardComponent  implements OnInit{
     colorScheme = {
         domain: ['#d2d2d2', '#f7f7f7']
     };
-
+    qualityColorScheme = {
+        domain: ['#C8E9FA', '#8BA2AD', '#C8E9FA', '#8BA2AD']
+    };
+    qualityView: any[] = [120, 100];
+    mockQualityData = [
+        {
+            "name": "1",
+            "value": 20
+        },
+        {
+            "name": "2",
+            "value": 24
+        },
+        {
+            "name": "3",
+            "value": 30
+        },
+        {
+            "name": "4",
+            "value": 19
+        }
+    ]
     ngOnInit() {
 
         this.projectService.getProjects().then((result) => {

@@ -8,6 +8,55 @@
 .dd-card-content {
   margin: 0 15px;
 
+  .codebase-health-container {
+    clear: both;
+
+    h3 {
+      font-family: 'Open Sans';
+      background: rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    ul {
+      padding-left: 0;
+
+      li {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+        .value {
+          display: block;
+          float: right;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+
+  .code-coverage {
+    height: 120px;
+
+    .percentage {
+      margin-top: 30px;
+      margin-left: -20px;
+    }
+
+    .percentage-label {
+      position: absolute;
+      margin-top: 50px;
+      margin-left: 27px;
+      font-weight: 600;
+    }
+
+    .chart-label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+    }
+  }
+
   .dd-left-status {
     border-right: 1px solid rgba(0, 0, 0, 0.12);
     float: left;
@@ -24,54 +73,6 @@
     padding: 5px 20px;
     margin: 15px 0;
     height: 450px;
-
-    .code-coverage {
-
-      .percentage {
-        margin-top: 30px;
-        margin-left: -20px;
-      }
-
-      .percentage-label {
-        position: absolute;
-        margin-top: 50px;
-        margin-left: 27px;
-        font-weight: 600;
-      }
-
-      .chart-label {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100px;
-      }
-    }
-
-    .codebase-health-container {
-      clear: both;
-
-      h3 {
-        font-family: 'Open Sans';
-        background: rgba(0, 0, 0, 0.1);
-        padding: 10px;
-        font-size: 16px;
-      }
-
-      ul {
-        padding-left: 0;
-
-        li {
-          padding: 10px 0;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-
-          .value {
-            display: block;
-            float: right;
-            padding-right: 5px;
-          }
-        }
-      }
-    }
   }
 }
 
