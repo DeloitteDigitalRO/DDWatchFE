@@ -51,7 +51,7 @@ export class ProjectReportsComponent {
     }
 
     public upload(data) {
-        let uploadURL = 'http://localhost:9090/project_report//metrics/upload';
+        let uploadURL = 'http://localhost:9090/project_report/metrics/upload';
 
         return this.httpClient.post<any>(uploadURL, data, {
             reportProgress: true,

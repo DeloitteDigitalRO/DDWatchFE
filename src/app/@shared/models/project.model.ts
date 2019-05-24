@@ -18,7 +18,12 @@ export interface ProjectInterface {
     "sonarQubeUrl": string,
     "sonarComponentKey": string,
     "latestQualityReportData": any,
-    "overallCoverageChartData": any
+    "overallCoverageChartData": any,
+    // Metrics
+    "metricsReports": any,
+    "lastMetricsReport": any,
+    "latestMetricReport": any,
+    "deliveryBarChartData": any
 }
 
 @Injectable()
@@ -41,5 +46,9 @@ export class Project implements ProjectInterface {
     "sonarComponentKey": string;
     "latestQualityReportData": any;
     "overallCoverageChartData": any;
-
+    // Metrics
+    "metricsReports": any;
+    "lastMetricsReport": any;
+    "latestMetricReport": any;
+    "deliveryBarChartData": any;
 }
