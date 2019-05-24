@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-5 spaced">
                             <span>
-                                {{ metrics.empireTimeValue }}%
+                                {{ metrics.empireTimeValue.toFixed(2) }}%
                             </span>
                         </div>
                         <div class="col-2 status">
@@ -48,7 +48,7 @@
                             Delivery
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.deliveryValue }}%
+                            {{ metrics.deliveryValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.deliveryStatus)"></i>
@@ -59,7 +59,7 @@
                             Attrition
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.attritionValue }}%
+                            {{ metrics.attritionValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.attritionStatus)"></i>
@@ -108,7 +108,7 @@
                             Test Code Coverage
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.testCoverageValue }}%
+                            {{ metrics.testCoverageValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.testCoverageStatus)"></i>
@@ -119,7 +119,7 @@
                             Branch Coverage
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.branchCoverageValue }}%
+                            {{ metrics.branchCoverageValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.branchCoverageStatus)"></i>
@@ -130,7 +130,7 @@
                             Density of Duplication
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.duplicationDensityValue }}%
+                            {{ metrics.duplicationDensityValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
                             <i [ngClass]="getStatusStyle(metrics.duplicationDensityStatus)"></i>
