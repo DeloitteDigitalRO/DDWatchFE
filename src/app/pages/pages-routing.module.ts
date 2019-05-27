@@ -6,7 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProjectComponent } from './project/project.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { NewProjectComponent } from './new-project/new-project.component';
-import { ProjectReportsComponent } from './project-reports/project-reports.component';
+import { DeliveryReportsComponent } from './delivery-reports/delivery-reports.component';
 
 
 const routes: Routes = [{
@@ -36,7 +36,7 @@ const routes: Routes = [{
     },
     {
       path: 'project-reports/:projectId',
-      component: ProjectReportsComponent,
+      component: DeliveryReportsComponent,
     },
   ],
 }];

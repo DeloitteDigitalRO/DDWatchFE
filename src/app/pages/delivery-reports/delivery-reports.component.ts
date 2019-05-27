@@ -6,10 +6,10 @@ import { map } from  'rxjs/operators';
 
 @Component({
     selector: 'ngx-project',
-    templateUrl: './project-reports.component.html',
-    styleUrls: ['./project-reports.component.scss']
+    templateUrl: './delivery-reports.component.html',
+    styleUrls: ['./delivery-reports.component.scss']
 })
-export class ProjectReportsComponent {
+export class DeliveryReportsComponent {
 
     projectId: String;
     form: FormGroup;
@@ -72,11 +72,11 @@ export class ProjectReportsComponent {
     public getStatusStyle(status) {
         switch (status) {
             case 'A':
-                return ['ion-alert-circled', 'amber'];
+                return ['ion-alert-circled', 'status-text-warn'];
             case 'G':
-                return ['ion-checkmark-circled', 'green'];
+                return ['ion-checkmark-circled', 'status-text-ok'];
             case 'R':
-                return ['ion-close-circled', 'red'];
+                return ['ion-close-circled', 'status-text-alert'];
         }
     }
 }
