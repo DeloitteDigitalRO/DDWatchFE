@@ -51,7 +51,7 @@ export class DashboardComponent  implements OnInit{
             this.setLatestQualityReport(this.projects);
 
             //set latests metrics report & delivery bar chart data
-            this.setLatestMetricsReport(this.projects);
+            this.setLatestDeliveryReport(this.projects);
             this.setDeliveryChartData(this.projects);
 
             console.log('Post setup projects', this.projects);
@@ -82,18 +82,18 @@ export class DashboardComponent  implements OnInit{
         })
     }
 
-    setLatestMetricsReport(projects: Array<Project>) {
+    setLatestDeliveryReport(projects: Array<Project>) {
         projects.forEach( (project) => {
-            project.latestMetricReport = project.metricsReports[0];
+            project.latestDeliveryReport = project.deliveryReports[0];
         })
     }
 
     setDeliveryChartData(projects: Array<Project>) {
         projects.forEach( (project) => {
-            let deliveryBarCharData = project.metricsReports.slice(0, 4).map((report, idx) => {
+            let deliveryBarCharData = project.deliveryReports.slice(0, 4).map((report, idx) => {
                 return {
                     "name": idx,
-                    "value": report.deliveryValue
+                    "value": report.metricsReport.deliveryValue
                 }
             });
 

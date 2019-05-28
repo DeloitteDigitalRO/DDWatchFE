@@ -23,7 +23,7 @@
             </nb-card-body>
         </nb-card>
     </div>
-    <div class="row" *ngIf="metrics">
+    <div class="row" *ngIf="deliveryReport">
         <nb-card class="dd-card-container col-sm-12">
             <nb-card-body class="dd-card">
                 <div class="dd-card-header">
@@ -36,11 +36,11 @@
                         </div>
                         <div class="col-5 spaced">
                             <span>
-                                {{ metrics.empireTimeValue.toFixed(2) }}%
+                                {{ deliveryReport.metricsReport.empireTimeValue.toFixed(2) }}%
                             </span>
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.empireTimeStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.empireTimeStatus)"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -48,10 +48,10 @@
                             Delivery
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.deliveryValue.toFixed(2) }}%
+                            {{ deliveryReport.metricsReport.deliveryValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.deliveryStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.deliveryStatus)"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -59,10 +59,10 @@
                             Attrition
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.attritionValue.toFixed(2) }}%
+                            {{ deliveryReport.metricsReport.attritionValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.attritionStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.attritionStatus)"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -70,10 +70,10 @@
                             Invoicing
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.invoicingValue }}
+                            {{ deliveryReport.metricsReport.invoicingValue }}
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.invoicingStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.invoicingStatus)"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -82,14 +82,14 @@
                         </div>
                         <div class="col-5 spaced">
                             <div>
-                                Seniority: {{ metrics.escalationSeniorityValue }}
+                                Seniority: {{ deliveryReport.metricsReport.escalationSeniorityValue }}
                             </div>
                             <div>
-                                Root cause: {{ metrics.escalationRootCauseValue }}
+                                Root cause: {{ deliveryReport.metricsReport.escalationRootCauseValue }}
                             </div>
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.escalationStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.escalationStatus)"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -97,10 +97,10 @@
                             Change Order
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.changeOrderValue }}
+                            {{ deliveryReport.metricsReport.changeOrderValue }}
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.changeOrderStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.changeOrderStatus)"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -108,10 +108,10 @@
                             Test Code Coverage
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.testCoverageValue.toFixed(2) }}%
+                            {{ deliveryReport.metricsReport.testCoverageValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.testCoverageStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.testCoverageStatus)"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -119,10 +119,10 @@
                             Branch Coverage
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.branchCoverageValue.toFixed(2) }}%
+                            {{ deliveryReport.metricsReport.branchCoverageValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.branchCoverageStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.branchCoverageStatus)"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -130,10 +130,10 @@
                             Density of Duplication
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.duplicationDensityValue.toFixed(2) }}%
+                            {{ deliveryReport.metricsReport.duplicationDensityValue.toFixed(2) }}%
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.duplicationDensityStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.duplicationDensityStatus)"></i>
                         </div>
                     </div>
                     <div class="row p-0" style="border-top: 1px solid rgba(0, 0, 0, 0.12);">
@@ -141,10 +141,10 @@
                             Risk Overall Status
                         </div>
                         <div class="col-5 spaced">
-                            {{ metrics.riskOverallValue }}
+                            {{ deliveryReport.metricsReport.riskOverallValue }}
                         </div>
                         <div class="col-2 status">
-                            <i [ngClass]="getStatusStyle(metrics.riskOverallStatus)"></i>
+                            <i [ngClass]="getStatusStyle(deliveryReport.metricsReport.riskOverallStatus)"></i>
                         </div>
                     </div>
                 </section>

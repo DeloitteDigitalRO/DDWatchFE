@@ -13,7 +13,7 @@ export class DeliveryReportsComponent {
 
     projectId: String;
     form: FormGroup;
-    metrics: Object = null;
+    deliveryReport: Object = null;
 
     constructor(private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
@@ -39,19 +39,18 @@ export class DeliveryReportsComponent {
     onSubmit() {
         const formData = new FormData();
         console.log('Excel', this.form.get('excelReportFile').value)
-        formData.append('projectReportFile', this.form.get('excelReportFile').value);
-        formData.append('projectId', `${this.projectId}`);
-        this.upload(formData).subscribe(
+        formData.append('deliveryReportFile', this.form.get('excelReportFile').value);
+        this.upload(this.projectId, formData).subscribe(
           (res) => {
-            this.metrics = res;
-            console.log('Metrics', this.metrics);
+            this.deliveryReport = res;
+            console.log('Delivery report', this.deliveryReport);
           },
           (err) => console.log(err)
         );
     }
 
-    public upload(data) {
-        let uploadURL = 'http://localhost:9090/project_report/metrics/upload';
+    public upload(projectId, data) {
+        let uploadURL = `http://localhost:9090/projects/${projectId}/deliveryReports/upload`;
 
         return this.httpClient.post<any>(uploadURL, data, {
             reportProgress: true,

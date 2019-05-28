@@ -33,21 +33,21 @@
                             <h3>Delivery status</h3>
                             <ul>
                                 <li>
-                                    <span [ngClass]="getStatusColor(project.latestMetricReport.deliveryStatus)">
-                                        <i [ngClass]="getStatusIcon(project.latestMetricReport.deliveryStatus)"></i>
+                                    <span [ngClass]="getStatusColor(project.latestDeliveryReport.metricsReport.deliveryStatus)">
+                                        <i [ngClass]="getStatusIcon(project.latestDeliveryReport.metricsReport.deliveryStatus)"></i>
                                     </span>
                                     Delivery
-                                    <span class="value">{{ project.latestMetricReport.deliveryValue.toFixed(2) }}%</span>
+                                    <span class="value">{{ project.latestDeliveryReport.metricsReport.deliveryValue.toFixed(2) }}%</span>
                                 </li>
                                 <li>
-                                    <span [ngClass]="getStatusColor(project.latestMetricReport.invoicingStatus)">
-                                        <i [ngClass]="getStatusIcon(project.latestMetricReport.invoicingStatus)"></i>
+                                    <span [ngClass]="getStatusColor(project.latestDeliveryReport.metricsReport.invoicingStatus)">
+                                        <i [ngClass]="getStatusIcon(project.latestDeliveryReport.metricsReport.invoicingStatus)"></i>
                                     </span>
                                     Invoicing Status
                                 </li>
                                 <li>
-                                    <span [ngClass]="getStatusColor(project.latestMetricReport.changeOrderStatus)">
-                                        <i [ngClass]="getStatusIcon(project.latestMetricReport.changeOrderStatus)"></i>
+                                    <span [ngClass]="getStatusColor(project.latestDeliveryReport.metricsReport.changeOrderStatus)">
+                                        <i [ngClass]="getStatusIcon(project.latestDeliveryReport.metricsReport.changeOrderStatus)"></i>
                                     </span>
                                     Change Order
                                 </li>
