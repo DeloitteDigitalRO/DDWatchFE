@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { ProjectService } from '../../@shared/services/project.service';
 import { map } from  'rxjs/operators';
 
 @Component({
@@ -17,7 +17,7 @@ export class DeliveryReportsComponent {
 
     constructor(private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
-                private httpClient: HttpClient) {
+                private projectService: ProjectService) {
     }
 
     ngOnInit() {
@@ -40,32 +40,15 @@ export class DeliveryReportsComponent {
         const formData = new FormData();
         console.log('Excel', this.form.get('excelReportFile').value)
         formData.append('deliveryReportFile', this.form.get('excelReportFile').value);
-        this.upload(this.projectId, formData).subscribe(
+        this.projectService.uploadDeliveryReport(this.projectId, formData,
           (res) => {
-            this.deliveryReport = res;
-            console.log('Delivery report', this.deliveryReport);
+            if(res.deliveryReport) {
+                this.deliveryReport = res.deliveryReport;
+                console.log('Delivery report', this.deliveryReport);
+            }
           },
           (err) => console.log(err)
         );
-    }
-
-    public upload(projectId, data) {
-        let uploadURL = `http://localhost:9090/projects/${projectId}/deliveryReports/upload`;
-
-        return this.httpClient.post<any>(uploadURL, data, {
-            reportProgress: true,
-            observe: 'events'
-        }).pipe(map((event) => {
-            switch (event.type) {
-                case HttpEventType.UploadProgress:
-                    const progress = Math.round(100 * event.loaded / event.total);
-                    return { status: 'progress', message: progress };
-                case HttpEventType.Response:
-                    return event.body;
-                default:
-                    return `Unhandled event: ${event.type}`;
-            }
-        }));
     }
 
     public getStatusStyle(status) {
