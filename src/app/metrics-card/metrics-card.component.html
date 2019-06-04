@@ -1,0 +1,127 @@
+
+<nb-card class="dd-card-container col-sm-12">
+  <nb-card-body class="dd-card">
+      <div class="dd-card-header">
+          <h3>Project Metrics</h3>
+      </div>
+      <section class="dd-card-content p-2">
+          <div class="row">
+              <div class="col-5 label-col">
+                  Empire Time
+              </div>
+              <div class="col-5 spaced">
+                  <span>
+                      {{ deliveryReport.metricsReport.empireTimeValue.toFixed(2) }}%
+                  </span>
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.empireTimeStatus)"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-5 label-col">
+                  Delivery
+              </div>
+              <div class="col-5 spaced">
+                  {{ deliveryReport.metricsReport.deliveryValue.toFixed(2) }}%
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.deliveryStatus)"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-5 label-col">
+                  Attrition
+              </div>
+              <div class="col-5 spaced">
+                  {{ deliveryReport.metricsReport.attritionValue.toFixed(2) }}%
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.attritionStatus)"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-5 label-col">
+                  Invoicing
+              </div>
+              <div class="col-5 spaced">
+                  {{ deliveryReport.metricsReport.invoicingValue }}
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.invoicingStatus)"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-5 label-col">
+                  Escalation
+              </div>
+              <div class="col-5 spaced">
+                  <div>
+                      Seniority: {{ deliveryReport.metricsReport.escalationSeniorityValue }}
+                  </div>
+                  <div>
+                      Root cause: {{ deliveryReport.metricsReport.escalationRootCauseValue }}
+                  </div>
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.escalationStatus)"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-5 label-col">
+                  Change Order
+              </div>
+              <div class="col-5 spaced">
+                  {{ deliveryReport.metricsReport.changeOrderValue }}
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.changeOrderStatus)"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-5 label-col">
+                  Test Code Coverage
+              </div>
+              <div class="col-5 spaced">
+                  {{ deliveryReport.metricsReport.testCoverageValue.toFixed(2) }}%
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.testCoverageStatus)"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-5 label-col">
+                  Branch Coverage
+              </div>
+              <div class="col-5 spaced">
+                  {{ deliveryReport.metricsReport.branchCoverageValue.toFixed(2) }}%
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.branchCoverageStatus)"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-5 label-col">
+                  Density of Duplication
+              </div>
+              <div class="col-5 spaced">
+                  {{ deliveryReport.metricsReport.duplicationDensityValue.toFixed(2) }}%
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.duplicationDensityStatus)"></i>
+              </div>
+          </div>
+          <div class="row p-0 overall-status-row">
+              <div class="col-5 label-col">
+                  Risk Overall Status
+              </div>
+              <div class="col-5 spaced">
+                  {{ deliveryReport.metricsReport.riskOverallValue }}
+              </div>
+              <div class="col-2 status">
+                  <i class="status-icon" [ngClass]="getStatusStyle(deliveryReport.metricsReport.riskOverallStatus)"></i>
+              </div>
+          </div>
+      </section>
+  </nb-card-body>
+</nb-card>

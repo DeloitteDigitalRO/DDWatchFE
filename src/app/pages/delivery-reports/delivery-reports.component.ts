@@ -50,15 +50,4 @@ export class DeliveryReportsComponent {
           (err) => console.log(err)
         );
     }
-
-    public getStatusStyle(status) {
-        switch (status) {
-            case 'A':
-                return ['ion-alert-circled', 'status-text-warn'];
-            case 'G':
-                return ['ion-checkmark-circled', 'status-text-ok'];
-            case 'R':
-                return ['ion-close-circled', 'status-text-alert'];
-        }
-    }
 }

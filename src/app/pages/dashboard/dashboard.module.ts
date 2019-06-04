@@ -8,6 +8,7 @@ import { EditProjectComponent } from '../edit-project/edit-project.component';
 import { NewProjectComponent } from '../new-project/new-project.component';
 import { DeliveryReportsComponent } from '../delivery-reports/delivery-reports.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MetricsCardComponent } from '../../metrics-card/metrics-card.component';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
         ProjectComponent,
         EditProjectComponent,
         NewProjectComponent,
-        DeliveryReportsComponent
+        DeliveryReportsComponent,
+        MetricsCardComponent
     ],
 })
 export class DashboardModule { }
