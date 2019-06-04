@@ -17,11 +17,20 @@ export class MetricsCardComponent implements OnInit {
   public getStatusStyle(status) {
     switch (status) {
         case 'A':
-            return ['ion-alert-circled', 'status-text-warn'];
+          return ['ion-alert-circled', 'status-text-warn'];
         case 'G':
-            return ['ion-checkmark-circled', 'status-text-ok'];
+          return ['ion-checkmark-circled', 'status-text-ok'];
         case 'R':
-            return ['ion-close-circled', 'status-text-alert'];
+          return ['ion-close-circled', 'status-text-alert'];
+        default:
+          return ['ion-minus-circled'];
     }
+  }
+
+  public displayNumericValue(value) {
+    if(!value) {
+      return 'Not set';
+    }
+    return `${value.toFixed(2)} %`;
   }
 }

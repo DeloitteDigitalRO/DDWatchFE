@@ -8,87 +8,208 @@
                         <h3>Add new project</h3>
                     </div>
                     <section class="dd-card-content">
+                        <div class="col-sm-12 mt-3">
+                            <h5>Project Details</h5>
+                        </div>
+                    </section>
+                    <section class="dd-card-content">
                         <div class="input-group col-sm-6">
-                                <label>Project Name</label>
-                            <input type="text" class="form-control" placeholder="Project Name" name="projectName" fullWidth />
+                            <label>Project Name</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="project.name"
+                                placeholder="Project Name" name="projectName" fullWidth />
                             <span class="input-group-append">
                             </span>
                         </div>
                         <div class="input-group col-sm-6">
-                                <label>Description</label>
-                            <input type="text" class="form-control" placeholder="Description" name="description" fullWidth />
+                            <label>Description</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="project.description"
+                                placeholder="Description" name="description" fullWidth />
                             <span class="input-group-append">
                             </span>
                         </div>
                     </section>
                     <section class="dd-card-content">
                         <div class="input-group col-sm-6">
-                                <label>Delivery Lead</label>
-                            <input type="text" class="form-control" placeholder="Delivery Lead" name="deliveryLead" fullWidth />
+                            <label>Delivery Lead</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="project.deliveryLead"
+                                placeholder="Delivery Lead" name="deliveryLead" fullWidth />
                             <span class="input-group-append">
                             </span>
                         </div>
                         <div class="input-group col-sm-6">
-                                <label>Delivery lead email</label>
-                            <input type="email" class="form-control" placeholder="Email" name="deliveryLeadEmail" fullWidth />
-                            <span class="input-group-append">
-                            </span>
-                        </div>
-                    </section>
-                    <section class="dd-card-content">
-                        <div class="input-group col-sm-6">
-                                <label>Technical Lead</label>
-                            <input type="text" class="form-control" placeholder="Technical Lead" name="technicalLead" fullWidth />
-                            <span class="input-group-append">
-                            </span>
-                        </div>
-                        <div class="input-group col-sm-6">
-                                <label>Technical lead email</label>
-                            <input type="email" class="form-control" placeholder="Email" name="technicalLeadEmail" fullWidth />
+                            <label>Delivery lead email</label>
+                            <input type="email" class="form-control"
+                                [(ngModel)]="project.deliveryLeadEmail"
+                                placeholder="Email" name="deliveryLeadEmail" fullWidth />
                             <span class="input-group-append">
                             </span>
                         </div>
                     </section>
                     <section class="dd-card-content">
                         <div class="input-group col-sm-6">
-                                <label>Delivery Status</label>
-                            <input type="text" class="form-control" placeholder="Delivery Status" name="deliveryStatus" fullWidth />
+                            <label>Technical Lead</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="project.technicalLead"
+                                placeholder="Technical Lead" name="technicalLead" fullWidth />
                             <span class="input-group-append">
                             </span>
                         </div>
                         <div class="input-group col-sm-6">
-                                <label>Quality Status</label>
-                            <input type="text" class="form-control" placeholder="Quality Status" name="qualityStatus" fullWidth />
+                            <label>Technical lead email</label>
+                            <input type="email" class="form-control"
+                                [(ngModel)]="project.technicalLeadEmail"
+                                placeholder="Email" name="technicalLeadEmail" fullWidth />
                             <span class="input-group-append">
                             </span>
                         </div>
                     </section>
                     <section class="dd-card-content">
                         <div class="input-group col-sm-6">
+                            <label>Delivery Status</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="project.deliveryStatus"
+                                placeholder="Delivery Status" name="deliveryStatus" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                        <div class="input-group col-sm-6">
+                            <label>Quality Status</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="project.qualityStatus"
+                                placeholder="Quality Status" name="qualityStatus" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                    </section>
+                    <section class="dd-card-content">
+                        <div class="input-group col-sm-6">
+                            <label>Tags</label>
+                            <input type="text" class="form-control"
+                            [(ngModel)]="tags"
+                                placeholder="tag1 tag2 tag3 etc." name="tags" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                    </section>
+                    <!-- Added Repos -->
+                    <section class="dd-card-content">
+                        <div class="col-sm-12 mt-3">
+                            <h5>Project Repositories</h5>
+                        </div>
+                    </section>
+                    <div *ngFor="let repository of project.repositories; index as i">
+                        <section class="dd-card-content">
+                            <div class="input-group col-sm-6">
+                                <label>Repository Name</label>
+                                <input type="text" class="form-control"
+                                    placeholder="Repository Name"
+                                    [(ngModel)]="repository.name"
+                                    name="repositoryName" fullWidth />
+                                <span class="input-group-append">
+                                </span>
+                            </div>
+                            <div class="input-group col-sm-6">
+                                <label>Repository URL</label>
+                                <input type="text" class="form-control"
+                                    placeholder="Repository URL"
+                                    [(ngModel)]="repository.url"
+                                    name="repositoryUrl" fullWidth />
+                                <span class="input-group-append">
+                                </span>
+                            </div>
+                        </section>
+                        <section class="dd-card-content row">
+                            <div class="input-group col-sm-6">
                                 <label>Sonar Qube URL</label>
-                            <input type="text" class="form-control" placeholder="SonarQube url" name="sonarQubeUrl" fullWidth />
+                                <input type="text" class="form-control"
+                                    placeholder="SonarQube url"
+                                    [(ngModel)]="repository.sonarQubeUrl"
+                                    name="sonarQubeUrl" fullWidth />
+                                <span class="input-group-append">
+                                </span>
+                            </div>
+                            <div class="col-sm-6 input-with-action">
+                                <div class="input-group">
+                                    <label>Sonar Component Key</label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Sonar Component Key"
+                                        [(ngModel)]="repository.sonarComponentKey"
+                                        name="sonarComponentKey" fullWidth />
+                                    <span class="input-group-append">
+                                    </span>
+                                </div>
+                                <div class="m-1">
+                                    <button
+                                        class="btn-danger px-2"
+                                        (click)="removeRepository(repository)">
+                                        <i class="ion-minus-circled"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                        <hr>
+                    </div>
+                    <!-- New Repository -->
+                    <section class="dd-card-content">
+                        <div class="input-group col-sm-6">
+                            <label>Repository Name</label>
+                            <input type="text" class="form-control"
+                                placeholder="Repository Name"
+                                [(ngModel)]="newRepository.name"
+                                name="sonarQubeUrl" fullWidth />
                             <span class="input-group-append">
                             </span>
                         </div>
                         <div class="input-group col-sm-6">
+                            <label>Repository URL</label>
+                            <input type="text" class="form-control"
+                                placeholder="Repository URL"
+                                [(ngModel)]="newRepository.url"
+                                name="sonarComponentKey" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                    </section>
+                    <section class="dd-card-content row">
+                        <div class="input-group col-sm-6">
+                            <label>Sonar Qube URL</label>
+                            <input type="text" class="form-control"
+                                placeholder="SonarQube url"
+                                [(ngModel)]="newRepository.sonarQubeUrl"
+                                name="sonarQubeUrl" fullWidth />
+                            <span class="input-group-append">
+                            </span>
+                        </div>
+                        <div class="col-sm-6 input-with-action">
+                            <div class="input-group">
                                 <label>Sonar Component Key</label>
-                            <input type="text" class="form-control" placeholder="Sonar Component Key" name="sonarComponentKey" fullWidth />
-                            <span class="input-group-append">
-                            </span>
+                                <input type="text" class="form-control"
+                                    placeholder="Sonar Component Key"
+                                    [(ngModel)]="newRepository.sonarComponentKey"
+                                    name="sonarComponentKey" fullWidth />
+                                <span class="input-group-append">
+                                </span>
+                            </div>
+                            <div class="m-1">
+                                <button
+                                    class="px-2"
+                                    [ngClass]="getAddRepositoryButtonStyle()"
+                                    [disabled]="!isRepositoryComplete()"
+                                    (click)="addRepository(repository)">
+                                    <i class="ion-checkmark-circled"></i>
+                                </button>
+                            </div>
                         </div>
                     </section>
+                    <hr>
                     <section class="dd-card-content">
-                        <div class="input-group col-sm-6">
-                                <label>Tags</label>
-                            <input type="text" class="form-control" placeholder="Tags" name="tags" fullWidth />
-                            <span class="input-group-append">
-                            </span>
-                        </div>
-                    </section>
-                    <section class="dd-card-content">
-                        <div class="input-group sonar-report-container">
-                            <button type="submit" class="btn btn-primary input-group-text">
-                                Submit
+                        <div class="p-2 form-action">
+                            <button type="submit"
+                                (click)="saveProject()">
+                                Save
                             </button>
                         </div>
                     </section>

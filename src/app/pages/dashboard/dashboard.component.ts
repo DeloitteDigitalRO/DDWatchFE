@@ -115,9 +115,14 @@ export class DashboardComponent  implements OnInit{
         return  chartData
     }
 
-    addReport(projectId) {
-        console.log(projectId)
-        this.router.navigateByUrl('/pages/project-reports/' + projectId);
+    addReport(project) {
+        console.log('Add report to project', project)
+        this.router.navigateByUrl(`/pages/project-reports/${project.id}`);
+    }
+
+    getDeliveryDetails(project) {
+        console.log('Delivery details for project', project.id);
+        this.router.navigateByUrl(`/pages/project-delivery/${project.id}`, project);
     }
 
     getStatusColor(status) {

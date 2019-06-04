@@ -13,8 +13,10 @@ export interface ProjectInterface {
     "qualityReports": QualityReport[],
     "lastQualityReport": string,
     "tags": string[],
-    "sonarQubeUrl": string,
-    "sonarComponentKey": string,
+    // Repositories
+    // "sonarQubeUrl": string,
+    // "sonarComponentKey": string,
+    "repositories": Object[],
     "latestQualityReportData": any,
     "overallCoverageChartData": any,
     // Metrics
@@ -25,6 +27,11 @@ export interface ProjectInterface {
 
 @Injectable()
 export class Project implements ProjectInterface {
+
+    public constructor(repositories: Object[]) {
+        this.repositories = repositories;
+    }
+
     "id": string;
     "name": string;
     "description": string;
@@ -37,8 +44,9 @@ export class Project implements ProjectInterface {
     "qualityReports": QualityReport[];
     "lastQualityReport": string;
     "tags": string[];
-    "sonarQubeUrl": string;
-    "sonarComponentKey": string;
+    "repositories": Object[];
+    // "sonarQubeUrl": string;
+    // "sonarComponentKey": string;
     "latestQualityReportData": any;
     "overallCoverageChartData": any;
     // Delivery Reports

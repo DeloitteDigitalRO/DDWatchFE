@@ -6,3 +6,15 @@
         width: 100%;
     }
 }
+
+.input-with-action {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.form-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
