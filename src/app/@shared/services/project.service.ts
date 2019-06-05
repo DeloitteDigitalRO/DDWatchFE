@@ -12,7 +12,7 @@ export class ProjectService {
         this.baseUrl = `${environment.apiEndpooint}/projects`;
     }
 
-    async saveProject(project, successCb, errorCb) {
+    async createProject(project, successCb, errorCb) {
         const url = `${this.baseUrl}`;
         return await this.http.post<any>(url, project, {
             reportProgress: true,

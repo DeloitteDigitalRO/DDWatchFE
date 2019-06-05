@@ -57,15 +57,17 @@ export class ProjectComponent {
     }
 
     initChartData(activeProject) {
+        let defaultRepo = activeProject.projectRepos.find(repo => repo.isDefault) || activeProject.projectRepos[0];
+
         //loop through all the metrics and assign them as data arrays
         //this.metrics = {Object.assign({}, activeProject.qualityReports[0].sonarQubeReport)};
         this.metrics = {};
-        for (var key in activeProject.qualityReports[0].sonarQubeReport) {
+        for (var key in defaultRepo.qualityReports[0].sonarQubeReport) {
             if(this.disabledMetrics.indexOf(key) === -1){
                 this.metrics[key] = [{name: key, series:[]}]
             }
         }
-        activeProject.qualityReports.forEach((sonarReport) => {
+        defaultRepo.qualityReports.forEach((sonarReport) => {
             const date = moment(sonarReport.updateDate).format('DD MM')
             for (var _key in sonarReport.sonarQubeReport) {
                 if(this.disabledMetrics.indexOf(_key) === -1){

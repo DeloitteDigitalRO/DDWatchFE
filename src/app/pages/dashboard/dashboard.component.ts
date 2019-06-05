@@ -47,6 +47,8 @@ export class DashboardComponent  implements OnInit{
 
         this.projectService.getProjects().then((result) => {
             this.projects = result as Array<Project>;
+            console.log('Projects', this.projects);
+
             //set the latest quality report for each project
             this.setLatestQualityReport(this.projects);
 
@@ -73,9 +75,10 @@ export class DashboardComponent  implements OnInit{
 
     setLatestQualityReport(projects: Array<Project>) {
         projects.forEach( (project) => {
+            let defaultRepo = project.projectRepos.find(repo => repo.isDefault) || project.projectRepos[0];
 
-            let latestQualityReport =  project.qualityReports.find((qr) => qr.updateDate === project.lastQualityReport);
-            project.latestQualityReportData = !latestQualityReport ? latestQualityReport = project.qualityReports[project.qualityReports.length-1] : latestQualityReport;
+            let latestQualityReport =  defaultRepo.qualityReports.find((qr) => qr.updateDate === project.lastQualityReport);
+            project.latestQualityReportData = latestQualityReport || defaultRepo.qualityReports[defaultRepo.qualityReports.length - 1];
 
             let overallCoverageChartData = this.generatePieChartData(project)
             project.overallCoverageChartData = overallCoverageChartData;

@@ -2,7 +2,8 @@
 <section>
     <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()"> -->
         <div class="row">
-            <nb-card class="dd-card-container col-sm-12">
+            <div class="col-2"></div>
+            <nb-card class="dd-card-container col-sm-8">
                 <nb-card-body class="dd-card">
                     <div class="dd-card-header">
                         <h3>Add new project</h3>
@@ -84,23 +85,13 @@
                             </span>
                         </div>
                     </section>
-                    <section class="dd-card-content">
-                        <div class="input-group col-sm-6">
-                            <label>Tags</label>
-                            <input type="text" class="form-control"
-                            [(ngModel)]="tags"
-                                placeholder="tag1 tag2 tag3 etc." name="tags" fullWidth />
-                            <span class="input-group-append">
-                            </span>
-                        </div>
-                    </section>
                     <!-- Added Repos -->
                     <section class="dd-card-content">
                         <div class="col-sm-12 mt-3">
                             <h5>Project Repositories</h5>
                         </div>
                     </section>
-                    <div *ngFor="let repository of project.repositories; index as i">
+                    <div class="repository" *ngFor="let repository of project.projectRepos; index as i">
                         <section class="dd-card-content">
                             <div class="input-group col-sm-6">
                                 <label>Repository Name</label>
@@ -150,63 +141,92 @@
                                 </div>
                             </div>
                         </section>
-                        <hr>
+                        <!-- <hr style="margin-top: 20px;"> -->
                     </div>
                     <!-- New Repository -->
-                    <section class="dd-card-content">
-                        <div class="input-group col-sm-6">
-                            <label>Repository Name</label>
-                            <input type="text" class="form-control"
-                                placeholder="Repository Name"
-                                [(ngModel)]="newRepository.name"
-                                name="sonarQubeUrl" fullWidth />
-                            <span class="input-group-append">
-                            </span>
-                        </div>
-                        <div class="input-group col-sm-6">
-                            <label>Repository URL</label>
-                            <input type="text" class="form-control"
-                                placeholder="Repository URL"
-                                [(ngModel)]="newRepository.url"
-                                name="sonarComponentKey" fullWidth />
-                            <span class="input-group-append">
-                            </span>
-                        </div>
-                    </section>
-                    <section class="dd-card-content row">
-                        <div class="input-group col-sm-6">
-                            <label>Sonar Qube URL</label>
-                            <input type="text" class="form-control"
-                                placeholder="SonarQube url"
-                                [(ngModel)]="newRepository.sonarQubeUrl"
-                                name="sonarQubeUrl" fullWidth />
-                            <span class="input-group-append">
-                            </span>
-                        </div>
-                        <div class="col-sm-6 input-with-action">
-                            <div class="input-group">
-                                <label>Sonar Component Key</label>
+                    <div class="repository">
+                        <section class="dd-card-content">
+                            <div class="input-group col-sm-6">
+                                <label>Repository Name</label>
                                 <input type="text" class="form-control"
-                                    placeholder="Sonar Component Key"
-                                    [(ngModel)]="newRepository.sonarComponentKey"
+                                    placeholder="Repository Name"
+                                    [(ngModel)]="newRepository.name"
+                                    name="sonarQubeUrl" fullWidth />
+                                <span class="input-group-append">
+                                </span>
+                            </div>
+                            <div class="input-group col-sm-6">
+                                <label>Repository URL</label>
+                                <input type="text" class="form-control"
+                                    placeholder="Repository URL"
+                                    [(ngModel)]="newRepository.url"
                                     name="sonarComponentKey" fullWidth />
                                 <span class="input-group-append">
                                 </span>
                             </div>
-                            <div class="m-1">
-                                <button
-                                    class="px-2"
-                                    [ngClass]="getAddRepositoryButtonStyle()"
-                                    [disabled]="!isRepositoryComplete()"
-                                    (click)="addRepository(repository)">
-                                    <i class="ion-checkmark-circled"></i>
-                                </button>
+                        </section>
+                        <section class="dd-card-content row">
+                            <div class="input-group col-sm-6">
+                                <label>Sonar Qube URL</label>
+                                <input type="text" class="form-control"
+                                    placeholder="SonarQube url"
+                                    [(ngModel)]="newRepository.sonarQubeUrl"
+                                    name="sonarQubeUrl" fullWidth />
+                                <span class="input-group-append">
+                                </span>
                             </div>
+                            <div class="col-sm-6 input-with-action">
+                                <div class="input-group">
+                                    <label>Sonar Component Key</label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Sonar Component Key"
+                                        [(ngModel)]="newRepository.sonarComponentKey"
+                                        name="sonarComponentKey" fullWidth />
+                                    <span class="input-group-append">
+                                    </span>
+                                </div>
+                                <div class="m-1">
+                                    <button
+                                        class="px-2"
+                                        [ngClass]="getAddRepositoryButtonStyle()"
+                                        [disabled]="!isRepositoryComplete()"
+                                        (click)="addRepository(repository)">
+                                        <i class="ion-checkmark-circled"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <section class="dd-card-content">
+                        <div class="col-sm-12 mt-3">
+                            <h5>Other Details</h5>
                         </div>
                     </section>
-                    <hr>
-                    <section class="dd-card-content">
-                        <div class="p-2 form-action">
+                    <div class="repository">
+                        <section class="dd-card-content">
+                            <div class="input-group col-sm-6">
+                                <label>Default Repository</label>
+                                <select type="text" class="form-control"
+                                    [(ngModel)]="defaultRepository" fullWidth>
+                                    <option *ngFor="let repo of project.projectRepos" [ngValue]="repo">
+                                        {{ repo.name }}
+                                    </option>
+                                </select>
+                                <span class="input-group-append">
+                                </span>
+                            </div>
+                            <div class="input-group col-sm-6">
+                                <label>Tags</label>
+                                <input type="text" class="form-control"
+                                    [(ngModel)]="tags"
+                                    placeholder="tag1 tag2 tag3 etc." name="tags" fullWidth />
+                                <span class="input-group-append">
+                                </span>
+                            </div>
+                        </section>
+                    </div>
+                    <section>
+                        <div class="form-action save">
                             <button type="submit"
                                 (click)="saveProject()">
                                 Save
@@ -215,6 +235,7 @@
                     </section>
                 </nb-card-body>
             </nb-card>
+            <div class="col-2"></div>
         </div>
     <!-- </form> -->
 </section>

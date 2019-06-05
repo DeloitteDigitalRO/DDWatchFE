@@ -1,5 +1,7 @@
 import { QualityReport } from './qualityReport.model';
+import { ProjectRepo } from './projectRepo.model';
 import { Injectable } from '@angular/core';
+
 export interface ProjectInterface {
     "id": string,
     "name": string,
@@ -10,13 +12,12 @@ export interface ProjectInterface {
     "technicalLeadEmail": string,
     "deliveryStatus": string,
     "qualityStatus": string,
-    "qualityReports": QualityReport[],
     "lastQualityReport": string,
     "tags": string[],
     // Repositories
     // "sonarQubeUrl": string,
     // "sonarComponentKey": string,
-    "repositories": Object[],
+    "projectRepos": ProjectRepo[],
     "latestQualityReportData": any,
     "overallCoverageChartData": any,
     // Metrics
@@ -28,8 +29,8 @@ export interface ProjectInterface {
 @Injectable()
 export class Project implements ProjectInterface {
 
-    public constructor(repositories: Object[]) {
-        this.repositories = repositories;
+    public constructor(projectRepos: ProjectRepo[]) {
+        this.projectRepos = projectRepos;
     }
 
     "id": string;
@@ -41,10 +42,9 @@ export class Project implements ProjectInterface {
     "technicalLeadEmail": string;
     "deliveryStatus": string;
     "qualityStatus": string;
-    "qualityReports": QualityReport[];
     "lastQualityReport": string;
     "tags": string[];
-    "repositories": Object[];
+    "projectRepos": ProjectRepo[];
     // "sonarQubeUrl": string;
     // "sonarComponentKey": string;
     "latestQualityReportData": any;
