@@ -12,13 +12,15 @@ export interface ProjectInterface {
     "qualityStatus": string,
     "qualityReports": QualityReport[],
     "lastQualityReport": string,
-    "deliveryReports": any[],
-    "lastDeliveryReport": string,
     "tags": string[],
     "sonarQubeUrl": string,
     "sonarComponentKey": string,
     "latestQualityReportData": any,
-    "overallCoverageChartData": any
+    "overallCoverageChartData": any,
+    // Metrics
+    "deliveryReports": any[];
+    "latestDeliveryReport": any;
+    "deliveryBarChartData": any
 }
 
 @Injectable()
@@ -34,12 +36,13 @@ export class Project implements ProjectInterface {
     "qualityStatus": string;
     "qualityReports": QualityReport[];
     "lastQualityReport": string;
-    "deliveryReports": any[];
-    "lastDeliveryReport": string;
     "tags": string[];
     "sonarQubeUrl": string;
     "sonarComponentKey": string;
     "latestQualityReportData": any;
     "overallCoverageChartData": any;
-
+    // Delivery Reports
+    "deliveryReports": any[];
+    "latestDeliveryReport": any;
+    "deliveryBarChartData": any;
 }

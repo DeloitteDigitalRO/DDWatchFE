@@ -6,6 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProjectComponent } from './project/project.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { DeliveryReportsComponent } from './delivery-reports/delivery-reports.component';
+
 
 const routes: Routes = [{
   path: '',
@@ -31,6 +33,10 @@ const routes: Routes = [{
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
+    },
+    {
+      path: 'project-reports/:projectId',
+      component: DeliveryReportsComponent,
     },
   ],
 }];

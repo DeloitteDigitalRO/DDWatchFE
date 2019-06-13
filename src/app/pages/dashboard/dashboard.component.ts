@@ -49,12 +49,17 @@ export class DashboardComponent  implements OnInit{
             this.projects = result as Array<Project>;
             //set the latest quality report for each project
             this.setLatestQualityReport(this.projects);
+
+            //set latests metrics report & delivery bar chart data
+            this.setLatestDeliveryReport(this.projects);
+            this.setDeliveryChartData(this.projects);
+
+            console.log('Post setup projects', this.projects);
         });
     };
 
-    getDeliveryDetails(reportId) {
+    getQualityDetails(reportId) {
         this.router.navigateByUrl('/pages/project/' + reportId);
-
     }
 
     editProject(projectId) {
@@ -77,6 +82,25 @@ export class DashboardComponent  implements OnInit{
         })
     }
 
+    setLatestDeliveryReport(projects: Array<Project>) {
+        projects.forEach( (project) => {
+            project.latestDeliveryReport = project.deliveryReports[0];
+        })
+    }
+
+    setDeliveryChartData(projects: Array<Project>) {
+        projects.forEach( (project) => {
+            let deliveryBarCharData = project.deliveryReports.slice(0, 4).map((report, idx) => {
+                return {
+                    "name": idx,
+                    "value": report.metricsReport.deliveryValue
+                }
+            });
+
+            project.deliveryBarChartData = deliveryBarCharData.reverse();
+        });
+    }
+
     generatePieChartData(project: Project) {
         const chartData = [
             {
@@ -89,5 +113,32 @@ export class DashboardComponent  implements OnInit{
             }
         ]
         return  chartData
+    }
+
+    addReport(projectId) {
+        console.log(projectId)
+        this.router.navigateByUrl('/pages/project-reports/' + projectId);
+    }
+
+    getStatusColor(status) {
+        switch (status) {
+            case 'A':
+                return ['status', 'status-warn'];
+            case 'G':
+                return ['status', 'status-ok'];
+            case 'R':
+                return ['status', 'status-alert'];
+        }
+    }
+
+    getStatusIcon(status) {
+        switch (status) {
+            case 'A':
+                return ['ion-alert-circled'];
+            case 'G':
+                return ['ion-checkmark-circled'];
+            case 'R':
+                return ['ion-close-circled'];
+        }
     }
 }
