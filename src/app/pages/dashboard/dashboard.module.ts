@@ -9,7 +9,7 @@ import { NewProjectComponent } from '../new-project/new-project.component';
 import { DeliveryReportsComponent } from '../delivery-reports/delivery-reports.component';
 import { ProjectDeliveryComponent } from '../project-delivery/project-delivery.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { MetricsCardComponent } from '../../metrics-card/metrics-card.component';
+import { MetricsCardComponent } from '../../@shared/components/metrics-card/metrics-card.component';
 
 @NgModule({
     imports: [
