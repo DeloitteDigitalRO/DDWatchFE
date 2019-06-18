@@ -7,7 +7,7 @@ import { ProjectService } from '../../@shared/services/project.service';
 @Component({
     selector: 'ngx-project',
     templateUrl: './new-project.component.html',
-    styleUrls: ['./new-project.component.scss']
+    styleUrls: ['./new-project.component.scss'],
 })
 export class NewProjectComponent implements OnInit {
     private project: Project;
@@ -21,35 +21,22 @@ export class NewProjectComponent implements OnInit {
 
     ngOnInit() {
         this.newRepository = new ProjectRepo();
-
-        // Mock data
-        const repo1: ProjectRepo = new ProjectRepo();
-        repo1.name = 'Repository 1';
-        repo1.url = 'http://vcs/repository1';
-        repo1.sonarQubeUrl = 'http://sonar:9000/repo1';
-        repo1.sonarComponentKey = 'sonar:repository1';
-
-        const repo2: ProjectRepo = new ProjectRepo();
-        repo2.name = 'Repository 2';
-        repo2.url = 'http://vcs/repository2';
-        repo2.sonarQubeUrl = 'http://sonar:9000/repo2';
-        repo2.sonarComponentKey = 'sonar:repository2';
-
-        this.project = new Project([repo1, repo2]);
+        this.project = new Project();
     }
 
     private removeRepository(repository) {
-        console.log('Removing repository', repository);
         this.project.projectRepos.forEach( (item, idx) => {
-            if(item === repository) {
+            if (item === repository) {
                 this.project.projectRepos.splice(idx, 1);
             }
         });
+        console.log('Removed repository', repository, ' Total repos', this.project.projectRepos.length);
     }
 
     private addRepository() {
-        console.log('Adding repository', this.newRepository);
         this.project.projectRepos.push(this.newRepository);
+        this.newRepository = new ProjectRepo();
+        console.log('Adding repository', this.newRepository, ' Total repos', this.project.projectRepos.length);
     }
 
     private saveProject() {
@@ -66,7 +53,7 @@ export class NewProjectComponent implements OnInit {
           },
           (err) => {
             console.error(err);
-          }
+          },
         );
     }
 
@@ -74,7 +61,7 @@ export class NewProjectComponent implements OnInit {
         if(this.isRepositoryComplete()) {
             return ['btn-primary'];
         } else {
-            return ['btn-disabled']
+            return ['btn-disabled'];
         }
     }
 

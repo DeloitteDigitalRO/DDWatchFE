@@ -2,8 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ProjectService } from '../../@shared/services/project.service';
 import { Project } from '../../@shared/models/project.model';
 import { Router } from '@angular/router';
-import { SonarReport } from '../../@shared/models/sonarReport.model';
-import { QualityReport } from '../../@shared/models/qualityReport.model';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -16,7 +14,6 @@ export class DashboardComponent  implements OnInit{
 
     projects: Array<Project> = [];
 
-    //chart data mock
     view: any[] = [120, 120];
     colorScheme = {
         domain: ['#d2d2d2', '#f7f7f7']
@@ -25,34 +22,17 @@ export class DashboardComponent  implements OnInit{
         domain: ['#C8E9FA', '#8BA2AD', '#C8E9FA', '#8BA2AD']
     };
     qualityView: any[] = [120, 100];
-    mockQualityData = [
-        {
-            "name": "1",
-            "value": 20
-        },
-        {
-            "name": "2",
-            "value": 24
-        },
-        {
-            "name": "3",
-            "value": 30
-        },
-        {
-            "name": "4",
-            "value": 19
-        }
-    ]
+
     ngOnInit() {
 
         this.projectService.getProjects().then((result) => {
             this.projects = result as Array<Project>;
             console.log('Projects', this.projects);
 
-            //set the latest quality report for each project
+            // set the latest quality report for each project
             this.setLatestQualityReport(this.projects);
 
-            //set latests metrics report & delivery bar chart data
+            // set latests metrics report & delivery bar chart data
             this.setLatestDeliveryReport(this.projects);
             this.setDeliveryChartData(this.projects);
 
@@ -80,7 +60,7 @@ export class DashboardComponent  implements OnInit{
             let latestQualityReport =  defaultRepo.qualityReports.find((qr) => qr.updateDate === project.lastQualityReport);
             project.latestQualityReportData = latestQualityReport || defaultRepo.qualityReports[defaultRepo.qualityReports.length - 1];
 
-            let overallCoverageChartData = this.generatePieChartData(project)
+            let overallCoverageChartData = this.generatePieChartData(project);
             project.overallCoverageChartData = overallCoverageChartData;
         })
     }
@@ -114,12 +94,12 @@ export class DashboardComponent  implements OnInit{
             "name": "2",
             "value": 100 - Math.floor(project.latestQualityReportData.sonarQubeReport.overallCoverage)
             }
-        ]
+        ];
         return  chartData
     }
 
     addReport(project) {
-        console.log('Add report to project', project)
+        console.log('Add report to project', project);
         this.router.navigateByUrl(`/pages/project-reports/${project.id}`);
     }
 
@@ -128,7 +108,34 @@ export class DashboardComponent  implements OnInit{
         this.router.navigateByUrl(`/pages/project-delivery/${project.id}`, project);
     }
 
-    getStatusColor(status) {
+    private getDeliveryValue(project: Project): string {
+        let value = 'Not available';
+        const isValueAvailable = project.latestDeliveryReport
+          && project.latestDeliveryReport.metricsReport
+          && project.latestDeliveryReport.metricsReport.deliveryValue;
+
+        if (isValueAvailable) {
+            value = `${project.latestDeliveryReport.metricsReport.deliveryValue.toFixed(2)}%`;
+        }
+
+        return value;
+    }
+
+    private getDeliveryStatus(project: Project): string {
+      let status = '';
+      const isStatusAvailable = project.latestDeliveryReport
+          && project.latestDeliveryReport.metricsReport
+          && project.latestDeliveryReport.metricsReport.deliveryStatus;
+
+      if (isStatusAvailable) {
+          status = project.latestDeliveryReport.metricsReport.deliveryStatus;
+      }
+
+      return status;
+    }
+
+    getStatusColor(project) {
+        const status: string = this.getDeliveryStatus(project);
         switch (status) {
             case 'A':
                 return ['status', 'status-warn'];
@@ -136,10 +143,13 @@ export class DashboardComponent  implements OnInit{
                 return ['status', 'status-ok'];
             case 'R':
                 return ['status', 'status-alert'];
+            default:
+                return ['status'];
         }
     }
 
-    getStatusIcon(status) {
+    getStatusIcon(project) {
+        const status: string = this.getDeliveryStatus(project);
         switch (status) {
             case 'A':
                 return ['ion-alert-circled'];
@@ -147,6 +157,8 @@ export class DashboardComponent  implements OnInit{
                 return ['ion-checkmark-circled'];
             case 'R':
                 return ['ion-close-circled'];
+            default:
+                return ['ion-minus-circled'];
         }
     }
 }

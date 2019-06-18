@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpEventType } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { map } from  'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectService {
@@ -16,23 +16,23 @@ export class ProjectService {
         const url = `${this.baseUrl}`;
         return await this.http.post<any>(url, project, {
             reportProgress: true,
-            observe: 'events'
+            observe: 'events',
         })
         .pipe(map(this.trackProgress))
         .subscribe(successCb, errorCb);
     }
 
     async getProjects() {
-        let asyncResult = await this.http.get(this.baseUrl, this.httpOptions()).toPromise();
+        const asyncResult = await this.http.get(this.baseUrl, this.httpOptions()).toPromise();
         this.projects = asyncResult;
-        return asyncResult
+        return asyncResult;
     }
 
     async uploadDeliveryReport(projectId, data, successCb, errorCb) {
         const url = `${this.baseUrl}/${projectId}/deliveryReports/upload`;
         return await this.http.post<any>(url, data, {
             reportProgress: true,
-            observe: 'events'
+            observe: 'events',
         })
         .pipe(map(this.trackProgress))
         .subscribe(successCb, errorCb);
@@ -40,8 +40,8 @@ export class ProjectService {
 
     private httpOptions() {
         return {
-            headers: new HttpHeaders({ 'Content-Type':  'application/json'})
-        } 
+            headers: new HttpHeaders({ 'Content-Type':  'application/json'}),
+        };
     }
 
     private trackProgress(event) {
@@ -51,7 +51,7 @@ export class ProjectService {
                 return { status: 'progress', message: progress };
             case HttpEventType.Response:
                 return {
-                  deliveryReport: event.body
+                  deliveryReport: event.body,
                 };
             default:
                 return `Unhandled event: ${event.type}`;
