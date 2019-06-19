@@ -12,14 +12,8 @@ export class ProjectService {
         this.baseUrl = `${environment.apiEndpooint}/projects`;
     }
 
-    async createProject(project, successCb, errorCb) {
-        const url = `${this.baseUrl}`;
-        return await this.http.post<any>(url, project, {
-            reportProgress: true,
-            observe: 'events',
-        })
-        .pipe(map(this.trackProgress))
-        .subscribe(successCb, errorCb);
+    async createProject(project) {
+        return await this.http.post<any>(this.baseUrl, project, this.httpOptions()).toPromise();
     }
 
     async getProjects() {

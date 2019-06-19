@@ -22,9 +22,9 @@
                         </div>
                         <div class="code-coverage">
                             <div class="percentage">
-                                <ngx-charts-bar-vertical [view]="qualityView" [scheme]="qualityColorScheme" [results]="project.deliveryBarChartData" [gradient]="gradient"
-                                [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
-                                [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [tooltipDisabled]="true" [roundEdges]="false">
+                                <ngx-charts-bar-vertical [view]="deliveryView" [scheme]="deliveryColorScheme" [results]="project.deliveryBarChartData" [gradient]="gradient"
+                                                         [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                                                         [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [tooltipDisabled]="true" [roundEdges]="false">
                                 </ngx-charts-bar-vertical>
                             </div>
                             <div class="chart-label">Overall delivery status</div>
@@ -33,21 +33,21 @@
                             <h3>Delivery status</h3>
                             <ul>
                                 <li>
-                                    <span [ngClass]="getStatusColor(project)">
-                                        <i [ngClass]="getStatusIcon(project)"></i>
+                                    <span [ngClass]="getStatusColor(getDeliveryStatus(project))">
+                                        <i [ngClass]="getStatusIcon(getDeliveryStatus(project))"></i>
                                     </span>
                                     Delivery
                                     <span class="value">{{ getDeliveryValue(project) }}</span>
                                 </li>
                                 <li>
-                                    <span [ngClass]="getStatusColor(project)">
-                                        <i [ngClass]="getStatusIcon(project)"></i>
+                                    <span [ngClass]="getStatusColor(getInvoicingStatus(project))">
+                                        <i [ngClass]="getStatusIcon(getInvoicingStatus(project))"></i>
                                     </span>
                                     Invoicing Status
                                 </li>
                                 <li>
-                                    <span [ngClass]="getStatusColor(project)">
-                                        <i [ngClass]="getStatusIcon(project)"></i>
+                                    <span [ngClass]="getStatusColor(getChangeOrderStatus(project))">
+                                        <i [ngClass]="getStatusIcon(getChangeOrderStatus(project))"></i>
                                     </span>
                                     Change Order
                                 </li>
@@ -65,25 +65,25 @@
                         </div>
                         <div class="code-coverage">
                             <div class="percentage">
-                                <ngx-charts-pie-chart [view]="view" arcWidth=0.25 [scheme]="colorScheme" [labels]="false"
-                                    [results]="project.overallCoverageChartData" [gradient]="gradient" [tooltipDisabled]="true" [doughnut]="true"
-                                    (select)="onSelect($event)">
+                                <ngx-charts-pie-chart [view]="qualityView" arcWidth=0.25 [scheme]="qualityColorScheme" [labels]="false"
+                                                      [results]="project.overallCoverageChartData" [gradient]="gradient" [tooltipDisabled]="true" [doughnut]="true"
+                                                      (select)="onSelect($event)">
                                 </ngx-charts-pie-chart>
                             </div>
-                            <div class="percentage-label">{{project.latestQualityReportData.sonarQubeReport.overallCoverage.toFixed(0)}}%</div>
+                            <div class="percentage-label">{{ getOverallCoverageDisplayValue(project) }}</div>
                             <div class="chart-label">Overall code coverage</div>
                         </div>
                         <div class="codebase-health-container">
                             <h3>Codebase Health</h3>
                             <ul>
                                 <li><span class="status status-alert"><i class="ion-close-circled"></i></span> Bugs
-                                    <span class="value">{{project.latestQualityReportData.sonarQubeReport.totalBugs}}</span>
+                                    <span class="value">{{ getTotalBugsDisplayValue(project) }}</span>
                                 </li>
                                 <li><span class="status status-warn"><i class="ion-alert-circled"></i></span> Vulnerabilites
-                                    <span class="value">{{project.latestQualityReportData.sonarQubeReport.totalVulnerabilities}}</span>
+                                    <span class="value">{{ getTotalVulnerabilitiesDisplayValue(project) }}</span>
                                 </li>
                                 <li><span class="status status-ok"><i class="ion-checkmark-circled"></i></span> Code Smell
-                                    <span class="value">{{project.latestQualityReportData.sonarQubeReport.totalCodeSmells}}</span>
+                                    <span class="value">{{ getTotalSmellsDisplayValue(project) }}</span>
                                 </li>
                             </ul>
                         </div>

@@ -46,19 +46,14 @@ export class NewProjectComponent implements OnInit {
             repo.isDefault = (repo === this.defaultRepository);
         });
         console.log('Saving project', this.project);
-        this.projectService.createProject(this.project,
-          (res) => {
-            console.log(res);
-            this.navigateToDashboard();
-          },
-          (err) => {
-            console.error(err);
-          },
-        );
+        this.projectService.createProject(this.project).then((result) => {
+          console.log('Create project result', result);
+          this.navigateToDashboard();
+        });
     }
 
     private getAddRepositoryButtonStyle() {
-        if(this.isRepositoryComplete()) {
+        if (this.isRepositoryComplete()) {
             return ['btn-primary'];
         } else {
             return ['btn-disabled'];
