@@ -1,144 +1,269 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ProjectService } from '../../@shared/services/project.service';
-import { Project } from '../../@shared/models/project.model';
-import { Router } from '@angular/router';
-import { SonarReport } from '../../@shared/models/sonarReport.model';
-import { QualityReport } from '../../@shared/models/qualityReport.model';
+import {Component, OnInit} from '@angular/core';
+import {ProjectService} from '../../@shared/services/project.service';
+import {Project} from '../../@shared/models/project.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent  implements OnInit{
+export class DashboardComponent implements OnInit {
 
-    constructor(private projectService: ProjectService, private router: Router){}
+  constructor(private projectService: ProjectService, private router: Router) {
+  }
 
-    projects: Array<Project> = [];
+  private projects: Array<Project> = [];
 
-    //chart data mock
-    view: any[] = [120, 120];
-    colorScheme = {
-        domain: ['#d2d2d2', '#f7f7f7']
-    };
-    qualityColorScheme = {
-        domain: ['#C8E9FA', '#8BA2AD', '#C8E9FA', '#8BA2AD']
-    };
-    qualityView: any[] = [120, 100];
-    mockQualityData = [
-        {
-            "name": "1",
-            "value": 20
-        },
-        {
-            "name": "2",
-            "value": 24
-        },
-        {
-            "name": "3",
-            "value": 30
-        },
-        {
-            "name": "4",
-            "value": 19
+  private qualityView: any[] = [120, 120];
+
+  private qualityColorScheme = {
+    domain: ['#8BA2AD', '#f7f7f7'],
+  };
+
+  private deliveryColorScheme = {
+    domain: ['#C8E9FA', '#8BA2AD', '#C8E9FA', '#8BA2AD'],
+  };
+
+  private deliveryView: any[] = [120, 100];
+
+  ngOnInit() {
+    this.projectService.getProjects().then((result) => {
+      this.projects = result as Array<Project>;
+      console.log('Projects', this.projects);
+
+      // set the latest quality report for each project
+      this.setLatestQualityReport(this.projects);
+
+      // set latests metrics report & delivery bar chart data
+      this.setLatestDeliveryReport(this.projects);
+      this.setDeliveryChartData(this.projects);
+
+      console.log('Post setup projects', this.projects);
+    });
+  }
+
+  getQualityDetails(reportId) {
+    this.router.navigateByUrl('/pages/project/' + reportId);
+  }
+
+  editProject(projectId) {
+    console.log(projectId);
+    this.router.navigateByUrl('/pages/edit-project/' + projectId);
+  }
+
+  createNewProject() {
+    this.router.navigateByUrl('/pages/new-project');
+  }
+
+  addReport(project: Project) {
+    console.log('Add report to project', project);
+    this.router.navigateByUrl(`/pages/project-reports/${project.id}`);
+  }
+
+  getDeliveryDetails(project: Project) {
+    console.log('Delivery details for project', project.id);
+    // @ts-ignore
+    this.router.navigateByUrl(`/pages/project-delivery/${project.id}`, project);
+  }
+
+  setLatestQualityReport(projects: Array<Project>) {
+    projects.forEach((project) => {
+      let latestQualityReport = null;
+      let defaultRepo = null;
+
+      if (project.projectRepos && project.projectRepos.length > 0) {
+        defaultRepo = project.projectRepos.find(repo => repo.isDefault) || project.projectRepos[0];
+      }
+
+      if (defaultRepo && defaultRepo.qualityReports && defaultRepo.qualityReports.length > 0) {
+        latestQualityReport = defaultRepo.qualityReports.find((qr) => qr.updateDate === project.lastQualityReport);
+        if (!latestQualityReport) {
+          latestQualityReport = defaultRepo.qualityReports[defaultRepo.qualityReports.length - 1];
         }
-    ]
-    ngOnInit() {
+      }
 
-        this.projectService.getProjects().then((result) => {
-            this.projects = result as Array<Project>;
-            //set the latest quality report for each project
-            this.setLatestQualityReport(this.projects);
+      project.latestQualityReportData = latestQualityReport;
+      project.overallCoverageChartData = this.generatePieChartData(project);
+    });
+  }
 
-            //set latests metrics report & delivery bar chart data
-            this.setLatestDeliveryReport(this.projects);
-            this.setDeliveryChartData(this.projects);
+  private isLatestSonarQubeReportAvailable(project: Project) {
+    return project.latestQualityReportData && project.latestQualityReportData.sonarQubeReport;
+  }
 
-            console.log('Post setup projects', this.projects);
-        });
-    };
-
-    getQualityDetails(reportId) {
-        this.router.navigateByUrl('/pages/project/' + reportId);
+  private getOverallCoverageValue(project: Project) {
+    if (this.isLatestSonarQubeReportAvailable(project)) {
+      return project.latestQualityReportData.sonarQubeReport.overallCoverage;
+    } else {
+      return 0;
     }
+  }
 
-    editProject(projectId) {
-        console.log(projectId)
-        this.router.navigateByUrl('/pages/edit-project/' + projectId);
+  private getOverallCoverageDisplayValue(project: Project) {
+    if (this.isLatestSonarQubeReportAvailable(project)) {
+      return `${this.getOverallCoverageValue(project).toFixed(0)}%`;
+    } else {
+      return '0%';
     }
+  }
 
-    createNewProject() {
-        this.router.navigateByUrl('/pages/new-project');
+  private getTotalBugsValue(project: Project) {
+    if (this.isLatestSonarQubeReportAvailable(project)) {
+      return project.latestQualityReportData.sonarQubeReport.totalBugs;
+    } else {
+      return 0;
     }
+  }
 
-    setLatestQualityReport(projects: Array<Project>) {
-        projects.forEach( (project) => {
-
-            let latestQualityReport =  project.qualityReports.find((qr) => qr.updateDate === project.lastQualityReport);
-            project.latestQualityReportData = !latestQualityReport ? latestQualityReport = project.qualityReports[project.qualityReports.length-1] : latestQualityReport;
-
-            let overallCoverageChartData = this.generatePieChartData(project)
-            project.overallCoverageChartData = overallCoverageChartData;
-        })
+  private getTotalBugsDisplayValue(project: Project) {
+    if (this.isLatestSonarQubeReportAvailable(project)) {
+      return `${this.getTotalBugsValue(project)}`;
+    } else {
+      return 'No info yet';
     }
+  }
 
-    setLatestDeliveryReport(projects: Array<Project>) {
-        projects.forEach( (project) => {
-            project.latestDeliveryReport = project.deliveryReports[0];
-        })
+  private getTotalVulnerabilitiesValue(project: Project) {
+    if (this.isLatestSonarQubeReportAvailable(project)) {
+      return project.latestQualityReportData.sonarQubeReport.totalVulnerabilities;
+    } else {
+      return 0;
     }
+  }
 
-    setDeliveryChartData(projects: Array<Project>) {
-        projects.forEach( (project) => {
-            let deliveryBarCharData = project.deliveryReports.slice(0, 4).map((report, idx) => {
-                return {
-                    "name": idx,
-                    "value": report.metricsReport.deliveryValue
-                }
-            });
-
-            project.deliveryBarChartData = deliveryBarCharData.reverse();
-        });
+  private getTotalVulnerabilitiesDisplayValue(project: Project) {
+    if (this.isLatestSonarQubeReportAvailable(project)) {
+      return `${this.getTotalVulnerabilitiesValue(project)}`;
+    } else {
+      return 'No info yet';
     }
+  }
 
-    generatePieChartData(project: Project) {
-        const chartData = [
-            {
-            "name": "1",
-            "value": Math.floor(project.latestQualityReportData.sonarQubeReport.overallCoverage)
-            },
-            {
-            "name": "2",
-            "value": 100 - Math.floor(project.latestQualityReportData.sonarQubeReport.overallCoverage)
-            }
-        ]
-        return  chartData
+  private getTotalSmellsValue(project: Project) {
+    if (this.isLatestSonarQubeReportAvailable(project)) {
+      return project.latestQualityReportData.sonarQubeReport.totalCodeSmells;
+    } else {
+      return 0;
     }
+  }
 
-    addReport(projectId) {
-        console.log(projectId)
-        this.router.navigateByUrl('/pages/project-reports/' + projectId);
+  private getTotalSmellsDisplayValue(project: Project) {
+    if (this.isLatestSonarQubeReportAvailable(project)) {
+      return `${this.getTotalSmellsValue(project)}`;
+    } else {
+      return 'No info yet';
     }
+  }
 
-    getStatusColor(status) {
-        switch (status) {
-            case 'A':
-                return ['status', 'status-warn'];
-            case 'G':
-                return ['status', 'status-ok'];
-            case 'R':
-                return ['status', 'status-alert'];
+  private generatePieChartData(project: Project) {
+    const overallCoverage = this.getOverallCoverageValue(project);
+    return [
+      {
+        'name': '1',
+        'value': Math.floor(overallCoverage),
+      },
+      {
+        'name': '2',
+        'value': 100 - Math.floor(overallCoverage),
+      },
+    ];
+  }
+
+  private setLatestDeliveryReport(projects: Array<Project>) {
+    projects.forEach((project) => {
+      project.latestDeliveryReport = project.deliveryReports[0];
+    });
+  }
+
+  private setDeliveryChartData(projects: Array<Project>) {
+    projects.forEach((project) => {
+      const deliveryBarCharData = project.deliveryReports.slice(0, 4).map((report, idx) => {
+        return {
+          'name': idx,
+          'value': report.metricsReport.deliveryValue,
+        };
+      });
+
+      if (deliveryBarCharData.length < 4) {
+        let remaining = 4 - deliveryBarCharData.length;
+        while (remaining > 0) {
+          deliveryBarCharData.push({
+            'name': remaining,
+            'value': 0,
+          });
+          remaining--;
         }
+      }
+
+      project.deliveryBarChartData = deliveryBarCharData.reverse();
+    });
+  }
+
+  private getDeliveryValue(project: Project): string {
+    let value = 'No info yet';
+    const isValueAvailable = project.latestDeliveryReport
+      && project.latestDeliveryReport.metricsReport
+      && project.latestDeliveryReport.metricsReport.deliveryValue;
+
+    if (isValueAvailable) {
+      value = `${project.latestDeliveryReport.metricsReport.deliveryValue.toFixed(2)}%`;
     }
 
-    getStatusIcon(status) {
-        switch (status) {
-            case 'A':
-                return ['ion-alert-circled'];
-            case 'G':
-                return ['ion-checkmark-circled'];
-            case 'R':
-                return ['ion-close-circled'];
-        }
+    return value;
+  }
+
+  private isLatestMetricsReportAvailable(project: Project) {
+    return project.latestDeliveryReport && project.latestDeliveryReport.metricsReport;
+  }
+
+  private getDeliveryStatus(project: Project): string {
+    if (this.isLatestMetricsReportAvailable(project)) {
+      return project.latestDeliveryReport.metricsReport.deliveryStatus;
+    } else {
+      return '';
     }
+  }
+
+  private getInvoicingStatus(project: Project): string {
+    if (this.isLatestMetricsReportAvailable(project)) {
+      return project.latestDeliveryReport.metricsReport.invoicingStatus;
+    } else {
+      return '';
+    }
+  }
+
+  private getChangeOrderStatus(project: Project): string {
+    if (this.isLatestMetricsReportAvailable(project)) {
+      return project.latestDeliveryReport.metricsReport.changeOrderStatus;
+    } else {
+      return '';
+    }
+  }
+
+  getStatusColor(statusValue: string) {
+    switch (statusValue) {
+      case 'A':
+        return ['status', 'status-warn'];
+      case 'G':
+        return ['status', 'status-ok'];
+      case 'R':
+        return ['status', 'status-alert'];
+      default:
+        return ['status', 'status-undefined'];
+    }
+  }
+
+  getStatusIcon(statusValue: string) {
+    switch (statusValue) {
+      case 'A':
+        return ['ion-alert-circled'];
+      case 'G':
+        return ['ion-checkmark-circled'];
+      case 'R':
+        return ['ion-close-circled'];
+      default:
+        return ['ion-minus-circled'];
+    }
+  }
 }

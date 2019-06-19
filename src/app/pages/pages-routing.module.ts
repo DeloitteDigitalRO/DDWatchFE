@@ -7,6 +7,7 @@ import { ProjectComponent } from './project/project.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { DeliveryReportsComponent } from './delivery-reports/delivery-reports.component';
+import { ProjectDeliveryComponent } from './project-delivery/project-delivery.component';
 
 
 const routes: Routes = [{
@@ -37,6 +38,10 @@ const routes: Routes = [{
     {
       path: 'project-reports/:projectId',
       component: DeliveryReportsComponent,
+    },
+    {
+      path: 'project-delivery/:id',
+      component: ProjectDeliveryComponent,
     },
   ],
 }];

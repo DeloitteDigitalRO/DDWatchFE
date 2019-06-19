@@ -2,7 +2,7 @@
 <section>
     <div class="row">
         <div class="dd-card-container col-sm-12">
-            <nb-card-body class="dd-card">
+            <nb-card-body class="dd-card p-2">
                 <button class="add-proj-btn float-right" (click)="createNewProject()">New Project</button>
             </nb-card-body>
         </div>
@@ -11,8 +11,8 @@
         <nb-card class="dd-card-container col-xl-4 col-lg-6 col-sm-12" *ngFor="let project of projects">
             <nb-card-body class="dd-card">
                 <div class="dd-card-header">
-                    <h3>{{project.name}}</h3>
-                    <span class="dd-project-date">{{project.date}}</span>
+                    <h3>{{ project.name }}</h3>
+                    <span class="dd-project-date">{{ project.date }}</span>
                 </div>
                 <section class="dd-card-content">
                     <div class="dd-left-status">
@@ -22,9 +22,9 @@
                         </div>
                         <div class="code-coverage">
                             <div class="percentage">
-                                <ngx-charts-bar-vertical [view]="qualityView" [scheme]="qualityColorScheme" [results]="project.deliveryBarChartData" [gradient]="gradient"
-                                [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
-                                [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [tooltipDisabled]="true" [roundEdges]="false">
+                                <ngx-charts-bar-vertical [view]="deliveryView" [scheme]="deliveryColorScheme" [results]="project.deliveryBarChartData" [gradient]="gradient"
+                                                         [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                                                         [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [tooltipDisabled]="true" [roundEdges]="false">
                                 </ngx-charts-bar-vertical>
                             </div>
                             <div class="chart-label">Overall delivery status</div>
@@ -33,29 +33,29 @@
                             <h3>Delivery status</h3>
                             <ul>
                                 <li>
-                                    <span [ngClass]="getStatusColor(project.latestDeliveryReport.metricsReport.deliveryStatus)">
-                                        <i [ngClass]="getStatusIcon(project.latestDeliveryReport.metricsReport.deliveryStatus)"></i>
+                                    <span [ngClass]="getStatusColor(getDeliveryStatus(project))">
+                                        <i [ngClass]="getStatusIcon(getDeliveryStatus(project))"></i>
                                     </span>
                                     Delivery
-                                    <span class="value">{{ project.latestDeliveryReport.metricsReport.deliveryValue.toFixed(2) }}%</span>
+                                    <span class="value">{{ getDeliveryValue(project) }}</span>
                                 </li>
                                 <li>
-                                    <span [ngClass]="getStatusColor(project.latestDeliveryReport.metricsReport.invoicingStatus)">
-                                        <i [ngClass]="getStatusIcon(project.latestDeliveryReport.metricsReport.invoicingStatus)"></i>
+                                    <span [ngClass]="getStatusColor(getInvoicingStatus(project))">
+                                        <i [ngClass]="getStatusIcon(getInvoicingStatus(project))"></i>
                                     </span>
                                     Invoicing Status
                                 </li>
                                 <li>
-                                    <span [ngClass]="getStatusColor(project.latestDeliveryReport.metricsReport.changeOrderStatus)">
-                                        <i [ngClass]="getStatusIcon(project.latestDeliveryReport.metricsReport.changeOrderStatus)"></i>
+                                    <span [ngClass]="getStatusColor(getChangeOrderStatus(project))">
+                                        <i [ngClass]="getStatusIcon(getChangeOrderStatus(project))"></i>
                                     </span>
                                     Change Order
                                 </li>
                             </ul>
                         </div>
                         <div class="details-container">
-                            <button class="details-proj-btn" (click)="getDeliveryDetails(project.id)">Details</button>
-                            <button class="add-proj-btn float-right" (click)="addReport(project.id)">Add Report</button>
+                            <button class="details-proj-btn" (click)="getDeliveryDetails(project)">Details</button>
+                            <button class="add-proj-btn float-right" (click)="addReport(project)">Add Report</button>
                         </div>
                     </div>
                     <div class="dd-right-status">
@@ -65,25 +65,25 @@
                         </div>
                         <div class="code-coverage">
                             <div class="percentage">
-                                <ngx-charts-pie-chart [view]="view" arcWidth=0.25 [scheme]="colorScheme" [labels]="false"
-                                    [results]="project.overallCoverageChartData" [gradient]="gradient" [tooltipDisabled]="true" [doughnut]="true"
-                                    (select)="onSelect($event)">
+                                <ngx-charts-pie-chart [view]="qualityView" arcWidth=0.25 [scheme]="qualityColorScheme" [labels]="false"
+                                                      [results]="project.overallCoverageChartData" [gradient]="gradient" [tooltipDisabled]="true" [doughnut]="true"
+                                                      (select)="onSelect($event)">
                                 </ngx-charts-pie-chart>
                             </div>
-                            <div class="percentage-label">{{project.latestQualityReportData.sonarQubeReport.overallCoverage.toFixed(0)}}%</div>
+                            <div class="percentage-label">{{ getOverallCoverageDisplayValue(project) }}</div>
                             <div class="chart-label">Overall code coverage</div>
                         </div>
                         <div class="codebase-health-container">
                             <h3>Codebase Health</h3>
                             <ul>
                                 <li><span class="status status-alert"><i class="ion-close-circled"></i></span> Bugs
-                                    <span class="value">{{project.latestQualityReportData.sonarQubeReport.totalBugs}}</span>
+                                    <span class="value">{{ getTotalBugsDisplayValue(project) }}</span>
                                 </li>
                                 <li><span class="status status-warn"><i class="ion-alert-circled"></i></span> Vulnerabilites
-                                    <span class="value">{{project.latestQualityReportData.sonarQubeReport.totalVulnerabilities}}</span>
+                                    <span class="value">{{ getTotalVulnerabilitiesDisplayValue(project) }}</span>
                                 </li>
                                 <li><span class="status status-ok"><i class="ion-checkmark-circled"></i></span> Code Smell
-                                    <span class="value">{{project.latestQualityReportData.sonarQubeReport.totalCodeSmells}}</span>
+                                    <span class="value">{{ getTotalSmellsDisplayValue(project) }}</span>
                                 </li>
                             </ul>
                         </div>

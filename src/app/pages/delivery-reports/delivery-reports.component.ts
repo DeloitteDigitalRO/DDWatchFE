@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProjectService } from '../../@shared/services/project.service';
-import { map } from  'rxjs/operators';
 
 @Component({
     selector: 'ngx-project',
     templateUrl: './delivery-reports.component.html',
-    styleUrls: ['./delivery-reports.component.scss']
+    styleUrls: ['./delivery-reports.component.scss'],
 })
 export class DeliveryReportsComponent {
 
@@ -38,7 +37,7 @@ export class DeliveryReportsComponent {
 
     onSubmit() {
         const formData = new FormData();
-        console.log('Excel', this.form.get('excelReportFile').value)
+        console.log('Excel', this.form.get('excelReportFile').value);
         formData.append('deliveryReportFile', this.form.get('excelReportFile').value);
         this.projectService.uploadDeliveryReport(this.projectId, formData,
           (res) => {
@@ -47,18 +46,7 @@ export class DeliveryReportsComponent {
                 console.log('Delivery report', this.deliveryReport);
             }
           },
-          (err) => console.log(err)
+          (err) => console.log(err),
         );
-    }
-
-    public getStatusStyle(status) {
-        switch (status) {
-            case 'A':
-                return ['ion-alert-circled', 'status-text-warn'];
-            case 'G':
-                return ['ion-checkmark-circled', 'status-text-ok'];
-            case 'R':
-                return ['ion-close-circled', 'status-text-alert'];
-        }
     }
 }
