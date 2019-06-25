@@ -2,10 +2,18 @@
     <nb-card class="dd-card-container col-sm-12">
         <nb-card-body class="dd-card">
             <div class="dd-card-header">
-                <h3>Cyclones</h3>
+                <h3>{{ activeProject.name }}</h3>
             </div>
             <section class="dd-card-content row">
                 <div class="ratings-container col-sm-4">
+                    <div class="repo-container py-2">
+                        <select type="text" class="form-control" [(ngModel)]="activeProjectRepo" (ngModelChange)="onChange($event)">
+                            <option *ngFor="let repo of activeProject.projectRepos" [ngValue]="repo">
+                                {{ repo.name }}
+                            </option>
+                        </select>
+                        <button class="add-proj-btn" (click)="refreshMetrics()">Pull Sonar Report</button>
+                    </div>
                     <nb-list>
                         <nb-list-item>
                             Project quality rating
@@ -13,25 +21,58 @@
                         </nb-list-item>
                         <nb-list-item>
                             Current overall coverage
-                            <span class="ratings status-ok">87</span>
+                            <span class="ratings status-ok">
+                                    {{activeProjectRepo.qualityReports[0].sonarQubeReport.overallCoverage.toFixed(1)}}
+                                </span>
                         </nb-list-item>
                         <nb-list-item>
                             Current code duplication
-                            <span class="ratings status-warn">44</span>
+                            <span class="ratings status-warn">
+                                {{activeProjectRepo.qualityReports[0].sonarQubeReport.duplicatedLines}}
+                            </span>
                         </nb-list-item>
                         <nb-list-item>
                             Current code bugs
-                            <span class="ratings status-alert">322</span>
+                            <span class="ratings status-alert">                               
+                                    {{activeProjectRepo.qualityReports[0].sonarQubeReport.totalBugs}}
+                                </span>
                         </nb-list-item>
                     </nb-list>
                 </div>
-                <div class="recommended-actions col-sm-8">
+                <div class="recommended-actions col-sm-4">
                     <h5>RECOMMENDED ACTIONS</h5>
                     <nb-list>
                         <nb-list-item class="recommended-list-item">Install Gradle plugin to integrate with BLA</nb-list-item>
                         <nb-list-item class="recommended-list-item">Run audit on library licences</nb-list-item>
                     </nb-list>
                 </div>
+                <div class="ratings-container py-3 col-sm-4">
+                        <h5>Overall project ratings</h5>
+                        <nb-list>
+                            <nb-list-item>
+                                Project quality rating
+                                <span class="ratings status-ok">87</span>
+                            </nb-list-item>
+                            <nb-list-item>
+                                Current overall coverage
+                                <span class="ratings status-ok">
+                                        {{getAverageOverallCoverage()}}
+                                    </span>
+                            </nb-list-item>
+                            <nb-list-item>
+                                Current code duplication
+                                <span class="ratings status-warn">
+                                    {{getAverageCodeDuplication()}}
+                                </span>
+                            </nb-list-item>
+                            <nb-list-item>
+                                Current code bugs
+                                <span class="ratings status-alert">                               
+                                        {{getAverageCodeBugs()}}
+                                    </span>
+                            </nb-list-item>
+                        </nb-list>
+                    </div>
             </section>
         </nb-card-body>
     </nb-card>

@@ -6,14 +6,22 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class ProjectService {
     baseUrl: string;
+    repoBaseUrl: string;
     projects;
 
     constructor(private http: HttpClient) {
         this.baseUrl = `${environment.apiEndpooint}/projects`;
+        this.repoBaseUrl = `${environment.apiEndpooint}/projectRepos`;
+
     }
 
     async createProject(project) {
         return await this.http.post<any>(this.baseUrl, project, this.httpOptions()).toPromise();
+    }
+
+    async updateProjetRepo(projectRepoId){
+        const url = `${this.repoBaseUrl}/${projectRepoId}/qualityReports/new`;
+        return await this.http.get(url, this.httpOptions()).toPromise();
     }
 
     async getProjects() {
