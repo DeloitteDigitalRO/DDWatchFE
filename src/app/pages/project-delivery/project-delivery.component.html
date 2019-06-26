@@ -1,7 +1,35 @@
-<section>
-  <div class="row">
-    <div class="col-12 p-0">
-        <metrics-card [deliveryReport]="project.latestDeliveryReport"></metrics-card>
+<div class="row">
+  <section class="dd-card-container col-sm-12">
+    <div class="row">
+      <div class="col-12 p-0">
+          <metrics-card [deliveryReport]="project.latestDeliveryReport"></metrics-card>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <nb-card class="dd-card-container col-xl-4 col-lg-6 col-sm-12" *ngFor="let key of objectKeys(metrics)">
+      <nb-card-body class="dd-card">
+          <div class="dd-card-header">
+              <h3>{{key}}</h3>
+          </div>
+          <section class="dd-card-content">
+              <div class="chart-container">
+                  <ngx-charts-line-chart
+                      [view]="view"
+                      [scheme]="colorScheme"
+                      [results]="metrics[key]"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabel"
+                      [yAxisLabel]="yAxisLabel"
+                      [autoScale]="autoScale">
+                  </ngx-charts-line-chart>
+              </div>
+          </section>
+      </nb-card-body>
+  </nb-card>
+</div>
