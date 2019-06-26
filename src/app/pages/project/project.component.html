@@ -7,7 +7,8 @@
             <section class="dd-card-content row">
                 <div class="ratings-container col-sm-4">
                     <div class="repo-container py-2">
-                        <select type="text" class="form-control" [(ngModel)]="activeProjectRepo" (ngModelChange)="onChange($event)">
+                        <select type="text" class="form-control" [(ngModel)]="activeProjectRepo"
+                            (ngModelChange)="onActiveRepoChange($event)">
                             <option *ngFor="let repo of activeProject.projectRepos" [ngValue]="repo">
                                 {{ repo.name }}
                             </option>
@@ -22,57 +23,58 @@
                         <nb-list-item>
                             Current overall coverage
                             <span class="ratings status-ok">
-                                    {{activeProjectRepo.qualityReports[0].sonarQubeReport.overallCoverage.toFixed(1)}}
-                                </span>
+                                {{getActiveSonarQubeReport().overallCoverage.toFixed(1)}}
+                            </span>
                         </nb-list-item>
                         <nb-list-item>
                             Current code duplication
                             <span class="ratings status-warn">
-                                {{activeProjectRepo.qualityReports[0].sonarQubeReport.duplicatedLines}}
+                                {{getActiveSonarQubeReport().duplicatedLines}}
                             </span>
                         </nb-list-item>
                         <nb-list-item>
                             Current code bugs
-                            <span class="ratings status-alert">                               
-                                    {{activeProjectRepo.qualityReports[0].sonarQubeReport.totalBugs}}
-                                </span>
+                            <span class="ratings status-alert">
+                                {{getActiveSonarQubeReport().totalBugs}}
+                            </span>
                         </nb-list-item>
                     </nb-list>
                 </div>
                 <div class="recommended-actions col-sm-4">
                     <h5>RECOMMENDED ACTIONS</h5>
                     <nb-list>
-                        <nb-list-item class="recommended-list-item">Install Gradle plugin to integrate with BLA</nb-list-item>
+                        <nb-list-item class="recommended-list-item">Install Gradle plugin to integrate with BLA
+                        </nb-list-item>
                         <nb-list-item class="recommended-list-item">Run audit on library licences</nb-list-item>
                     </nb-list>
                 </div>
                 <div class="ratings-container py-3 col-sm-4">
-                        <h5>Overall project ratings</h5>
-                        <nb-list>
-                            <nb-list-item>
-                                Project quality rating
-                                <span class="ratings status-ok">87</span>
-                            </nb-list-item>
-                            <nb-list-item>
-                                Current overall coverage
-                                <span class="ratings status-ok">
-                                        {{getAverageOverallCoverage()}}
-                                    </span>
-                            </nb-list-item>
-                            <nb-list-item>
-                                Current code duplication
-                                <span class="ratings status-warn">
-                                    {{getAverageCodeDuplication()}}
-                                </span>
-                            </nb-list-item>
-                            <nb-list-item>
-                                Current code bugs
-                                <span class="ratings status-alert">                               
-                                        {{getAverageCodeBugs()}}
-                                    </span>
-                            </nb-list-item>
-                        </nb-list>
-                    </div>
+                    <h5>Overall project ratings</h5>
+                    <nb-list>
+                        <nb-list-item>
+                            Project quality rating
+                            <span class="ratings status-ok">87</span>
+                        </nb-list-item>
+                        <nb-list-item>
+                            Current overall coverage
+                            <span class="ratings status-ok">
+                                {{getAverageOverallCoverage()}}
+                            </span>
+                        </nb-list-item>
+                        <nb-list-item>
+                            Current code duplication
+                            <span class="ratings status-warn">
+                                {{getAverageCodeDuplication()}}
+                            </span>
+                        </nb-list-item>
+                        <nb-list-item>
+                            Current code bugs
+                            <span class="ratings status-alert">
+                                {{getAverageCodeBugs()}}
+                            </span>
+                        </nb-list-item>
+                    </nb-list>
+                </div>
             </section>
         </nb-card-body>
     </nb-card>
@@ -83,18 +85,18 @@
             </div>
             <section class="dd-card-content">
                 <div class="chart-container">
-                    <ngx-charts-line-chart
-                        [view]="view"
-                        [scheme]="colorScheme"
+                    <ngx-charts-line-chart 
+                        [view]="view" 
+                        [scheme]="colorScheme" 
                         [results]="metrics[key]"
-                        [gradient]="gradient"
-                        [xAxis]="showXAxis"
-                        [yAxis]="showYAxis"
+                        [gradient]="gradient" 
+                        [xAxis]="showXAxis" 
+                        [yAxis]="showYAxis" 
                         [legend]="showLegend"
-                        [showXAxisLabel]="showXAxisLabel"
-                        [showYAxisLabel]="showYAxisLabel"
+                        [showXAxisLabel]="showXAxisLabel" 
+                        [showYAxisLabel]="showYAxisLabel" 
                         [xAxisLabel]="xAxisLabel"
-                        [yAxisLabel]="yAxisLabel"
+                        [yAxisLabel]="yAxisLabel" 
                         [autoScale]="autoScale">
                     </ngx-charts-line-chart>
                 </div>
