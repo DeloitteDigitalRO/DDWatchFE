@@ -15,6 +15,8 @@ export class ProjectComponent {
     projectList: Project[];
     metrics: Object;
     objectKeys = Object.keys;
+    activeProjectRepo: any;
+    activeProjectId: string;
 
     //chart  options
     showXAxis = true;
@@ -36,45 +38,109 @@ export class ProjectComponent {
     ngOnInit() {
 
         this.route.paramMap.subscribe((params: ParamMap) => {
-            const activeReportId = params.get('id');
+            this.activeProjectId = params.get('id');
 
             // get current report based on param ID
             if (params.has('id') && this.projectService.projects) {
                 this.projectList = this.projectService.projects;
-                this.activeProject = this.projectList.length > 0 && this.projectService.projects.find((el) => el.id === activeReportId)
-                this.initChartData(this.activeProject);
+                this.activeProject = this.getActiveProject();
+                this.activeProjectRepo = this.getActiveRepo();
+                this.initChartData();
             }
             // if page is accessed directly then fetch the data then filter the current report
             else {
                 this.projectService.getProjects().then((result) => {
                     this.projectList = result as Array<Project>;
-                    this.activeProject = this.projectList.length > 0 && this.projectService.projects.find((el) => el.id === activeReportId)
-                    this.initChartData(this.activeProject);
-                  })
+                    this.activeProject = this.getActiveProject();
+                    this.activeProjectRepo = this.getActiveRepo();
+                    this.initChartData();
+                })
             }
-
         });
     }
 
-    initChartData(activeProject) {
-        let defaultRepo = activeProject.projectRepos.find(repo => repo.isDefault) || activeProject.projectRepos[0];
-
+    initChartData() {
         //loop through all the metrics and assign them as data arrays
         //this.metrics = {Object.assign({}, activeProject.qualityReports[0].sonarQubeReport)};
         this.metrics = {};
-        for (var key in defaultRepo.qualityReports[0].sonarQubeReport) {
+        for (var key in this.activeProjectRepo.qualityReports[0].sonarQubeReport) {
             if(this.disabledMetrics.indexOf(key) === -1){
                 this.metrics[key] = [{name: key, series:[]}]
             }
-        }
-        defaultRepo.qualityReports.forEach((sonarReport) => {
+        }           
+
+        this.activeProjectRepo.qualityReports.slice().reverse().forEach(sonarReport => {
             const date = moment(sonarReport.updateDate).format('DD MM')
             for (var _key in sonarReport.sonarQubeReport) {
                 if(this.disabledMetrics.indexOf(_key) === -1){
                     this.metrics[_key][0].series.push({name: date, value: sonarReport.sonarQubeReport[_key]});
                 }
             }
-        })
+        });
+    
         console.log(this.metrics)
+    }
+
+    onActiveRepoChange(newValue) {
+        this.activeProjectRepo =  newValue;
+        this.initChartData();
+    }
+
+    refreshMetrics(){
+        this.projectService.updateProjetRepo(this.activeProjectRepo.id).then((result) => {
+            this.activeProjectRepo.qualityReports = ([result].concat(this.activeProjectRepo.qualityReports))
+            this.initChartData();
+        })
+    }
+
+    getAverageOverallCoverage(){
+        var repos = this.activeProject.projectRepos;
+        var total = 0;
+        var counter = 0;
+
+        repos.forEach(repo => {
+            total += repo.qualityReports[0].sonarQubeReport.overallCoverage;
+            counter++;
+        });
+
+        return (total/counter).toFixed(1);
+    }
+
+    getAverageCodeDuplication(){
+        var repos = this.activeProject.projectRepos;
+        var total = 0;
+        var counter = 0;
+
+        repos.forEach(repo => {
+            total += repo.qualityReports[0].sonarQubeReport.duplicatedLines;
+            counter++;
+        });
+
+        return (total/counter).toFixed(1);
+    }
+
+    getAverageCodeBugs(){
+        var repos = this.activeProject.projectRepos;
+        var total = 0;
+        var counter = 0;
+
+        repos.forEach(repo => {
+            total += repo.qualityReports[0].sonarQubeReport.totalBugs;
+            counter++;
+        });
+
+        return (total/counter).toFixed(1);
+    }
+
+    getActiveRepo(){
+        return this.activeProject.projectRepos.find(repo => repo.isDefault) || this.activeProject.projectRepos[0];
+    }
+
+    getActiveProject(){
+        return this.projectList.length > 0 && this.projectService.projects.find((el) => el.id === this.activeProjectId)
+    }
+
+    getActiveSonarQubeReport(){
+        return this.activeProjectRepo.qualityReports[0].sonarQubeReport;
     }
 }

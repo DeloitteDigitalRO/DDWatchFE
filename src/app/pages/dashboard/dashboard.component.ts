@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit {
       if (defaultRepo && defaultRepo.qualityReports && defaultRepo.qualityReports.length > 0) {
         latestQualityReport = defaultRepo.qualityReports.find((qr) => qr.updateDate === project.lastQualityReport);
         if (!latestQualityReport) {
-          latestQualityReport = defaultRepo.qualityReports[defaultRepo.qualityReports.length - 1];
+          latestQualityReport = defaultRepo.qualityReports[0];
         }
       }
 

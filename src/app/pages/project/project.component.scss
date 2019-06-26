@@ -9,7 +9,7 @@
         overflow: hidden;
     }
     .ratings {
-        width: 35px;
+        width: 50px;
         height: 25px;
         line-height: 25px;
         text-align: center;
@@ -17,6 +17,7 @@
         font-weight: bold;
         float: right;
     }
+
     .recommended-actions {
         padding: 10px 30px;
 
@@ -26,5 +27,21 @@
             list-style-type: disc;
             list-style-position: inside;
         }
+    }
+}
+
+.repo-container {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    select {
+        width: 70%;
+        margin-right: 5px;
+    }
+
+    button {
+        padding: 10px;
+        margin: 0;
     }
 }
