@@ -3,6 +3,7 @@
         <nb-card-body class="dd-card">
             <div class="dd-card-header">
                 <h3>{{ activeProject.name }}</h3>
+                <button class="add-proj-btn float-right" (click)="editProject(activeProject.id)">Edit Project</button>
             </div>
             <section class="dd-card-content row">
                 <div class="ratings-container col-sm-4">

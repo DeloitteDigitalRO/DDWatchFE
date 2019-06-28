@@ -13,6 +13,7 @@
                 <div class="dd-card-header">
                     <h3>{{ project.name }}</h3>
                     <span class="dd-project-date">{{ project.date }}</span>
+                    <button class="add-proj-btn float-right" (click)="addReport(project)">Add Report</button>
                 </div>
                 <section class="dd-card-content">
                     <div class="dd-left-status">
@@ -54,8 +55,7 @@
                             </ul>
                         </div>
                         <div class="details-container">
-                            <button class="details-proj-btn" (click)="getDeliveryDetails(project)">Details</button>
-                            <button class="add-proj-btn float-right" (click)="addReport(project)">Add Report</button>
+                            <button class="details-proj-btn" (click)="getDeliveryDetails(project)">Delivery Details</button>
                         </div>
                     </div>
                     <div class="dd-right-status">
@@ -88,8 +88,7 @@
                             </ul>
                         </div>
                         <div class="details-container">
-                            <button class="details-proj-btn" (click)="getQualityDetails(project.id)">Details</button>
-                            <button class="add-proj-btn float-right" (click)="editProject(project.id)">Edit Project</button>
+                            <button class="details-proj-btn" (click)="getQualityDetails(project.id)">Quality Details</button>
                         </div>
                     </div>
                 </section>

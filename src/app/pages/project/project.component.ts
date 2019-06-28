@@ -143,4 +143,9 @@ export class ProjectComponent {
     getActiveSonarQubeReport(){
         return this.activeProjectRepo.qualityReports[0].sonarQubeReport;
     }
+
+    editProject(projectId) {
+        console.log(projectId);
+        this.router.navigateByUrl('/pages/edit-project/' + projectId);
+      }
 }

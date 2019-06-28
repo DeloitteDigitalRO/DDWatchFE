@@ -47,11 +47,6 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/pages/project/' + reportId);
   }
 
-  editProject(projectId) {
-    console.log(projectId);
-    this.router.navigateByUrl('/pages/edit-project/' + projectId);
-  }
-
   createNewProject() {
     this.router.navigateByUrl('/pages/new-project');
   }
