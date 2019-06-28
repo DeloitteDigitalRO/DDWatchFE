@@ -13,6 +13,7 @@
 
     h3 {
       font-family: 'Open Sans';
+      vertical-align: middle;
       background: rgba(0, 0, 0, 0.1);
       padding: 10px;
       font-size: 16px;
@@ -103,8 +104,7 @@
   padding-top: 40px;
 }
 
-.details-container {
-  position: absolute;
+.details-container {  
   bottom: 20px;
 }
 
@@ -130,10 +130,17 @@ ul {
   }
 }
 
-.add-proj-btn, .details-proj-btn {
+.add-proj-btn {
   padding: 10px;
+  vertical-align: middle;
   margin: 0;
 }
+
+.details-proj-btn {
+  padding: 10px;
+  width: 100%;
+}
+
 .add-proj-btn {
   margin-left: 10px;
 }
